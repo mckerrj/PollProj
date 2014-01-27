@@ -1,0 +1,7 @@
+body {
+    background: white url("images/photo.JPG") no-repeat right bottom;
+}
+
+li a {
+    color: darkgreen;
+}

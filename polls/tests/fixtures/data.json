@@ -1,0 +1,144 @@
+[
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "mckerrj",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2014-01-09T18:01:46Z",
+      "groups": [],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$12000$TfFb9zTNMRzZ$5Tu5AqiMfP4WYkWgRLssMW/7TYAUzMQq1qxwm+hVByo=",
+      "email": "mckerrj@gmail.com",
+      "date_joined": "2014-01-04T23:11:29Z"
+    }
+  },
+
+  {
+    "pk": 8,
+    "model": "polls.poll",
+    "fields": {
+      "pub_date": "2014-01-18T23:29:45Z",
+      "question": "Poll 1"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "polls.poll",
+    "fields": {
+      "pub_date": "2014-01-18T23:29:56Z",
+      "question": "Poll 2"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "polls.poll",
+    "fields": {
+      "pub_date": "2014-01-18T23:30:05Z",
+      "question": "Poll 3"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "polls.poll",
+    "fields": {
+      "pub_date": "2014-01-18T18:03:48Z",
+      "question": "This is a question from a post"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "polls.choice",
+    "fields": {
+      "choice_text": "Poll 1, choice 1",
+      "poll": 8,
+      "votes": 7
+    }
+  },
+  {
+    "pk": 9,
+    "model": "polls.choice",
+    "fields": {
+      "choice_text": "Poll 1, choice 2",
+      "poll": 8,
+      "votes": 3
+    }
+  },
+  {
+    "pk": 10,
+    "model": "polls.choice",
+    "fields": {
+      "choice_text": "Poll 2, choice 1",
+      "poll": 9,
+      "votes": 1
+    }
+  },
+  {
+    "pk": 11,
+    "model": "polls.choice",
+    "fields": {
+      "choice_text": "Poll 2, choice 2",
+      "poll": 9,
+      "votes": 0
+    }
+  },
+  {
+    "pk": 8,
+    "model": "polls.entry",
+    "fields": {
+      "body": "This is the body",
+      "slug": "this-is-the-title",
+      "pub_date": "2014-01-15T19:45:40Z",
+      "user": 1,
+      "title": "This is the title"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "polls.entry",
+    "fields": {
+      "body": "This is the second body",
+      "slug": "this-is-the-second-title",
+      "pub_date": "2014-01-17T00:03:23Z",
+      "user": 1,
+      "title": "This is the second title"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "polls.entry",
+    "fields": {
+      "body": "This will prbbly be my lst post.",
+      "slug": "another-post",
+      "pub_date": "2011-05-22T04:46:38Z",
+      "user": 1,
+      "title": "Another Post"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "polls.entry",
+    "fields": {
+      "body": "This will probably be my last post.",
+      "slug": "another-post",
+      "pub_date": "2011-05-22T04:46:38Z",
+      "user": 1,
+      "title": "Another Post"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "polls.entry",
+    "fields": {
+      "body": "This will prbbly be my lst post.2",
+      "slug": "another-post",
+      "pub_date": "2011-11-22T05:46:38Z",
+      "user": 1,
+      "title": "Another Post2"
+    }
+  }
+]
