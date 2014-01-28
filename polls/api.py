@@ -36,7 +36,7 @@ class EntryResource(ModelResource):
         }
         #authorization = DjangoAuthorization()
         #authentication = OAuth20Authentication()
-        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 class PollResource(ModelResource):
