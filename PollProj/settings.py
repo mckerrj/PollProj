@@ -16,7 +16,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@w_ia9+*-o@pdgueo*n2ts4hr%3_&=l)!0ag5bg3%ght7=g&k-'
+#SECRET_KEY = '@w_ia9+*-o@pdgueo*n2ts4hr%3_&=l)!0ag5bg3%ght7=g&k-'
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SECRET_KEY = 'j@9vr6q+s$=s58!+a^e7&%$@+fr$j)$)de-sxk30&sfr$=&%&*'
+SESSION_COOKIE_NAME = "bouncer"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +43,7 @@ INSTALLED_APPS = (
     'tastypie',
     'provider',
     'provider.oauth2',
+    'tastypie_two_legged_oauth',
 )
 
 TEMPLATE_DIRS = (
@@ -79,7 +83,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'US/Eastern'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

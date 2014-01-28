@@ -1,15 +1,10 @@
-from django.test import TestCase
-import datetime
-from django.utils import timezone
+from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from tastypie.test import ResourceTestCase
 from polls.models import Entry
-
-
-class TestsBlah(TestCase):
-    def test_blah(self):
-        self.assertEqual('jason', 'jason')
-        print "Print to make sure test_api.py is actually being called."
+from tastypie_two_legged_oauth.models import OAuthConsumer
+from django.core.urlresolvers import reverse
+from happyhour.api.clients import oauth2_wrap
 
 
 class TestsEntryResource(ResourceTestCase):
@@ -21,54 +16,54 @@ class TestsEntryResource(ResourceTestCase):
         super(TestsEntryResource, self).setUp()
 
         # Create a user.
-        self.username = 'daniel'
-        self.password = 'pass'
-        self.user = User.objects.create_user(self.username, 'daniel@example.com', self.password)
+        self.username = 'mckerrj'
+        #self.user = User.objects.create_user(self.username, 'daniel@example.com', self.password)
+        self.user = User.objects.get(username=self.username)
+        self.consumer = OAuthConsumer.objects.create(name='Test', key='foo', secret='bar')
+
 
         # Fetch the ``Entry`` object we'll use in testing.
         # Note that we aren't using PKs because they can change depending
         # on what other tests are running.
-        #print Entry.objects.all()
-        e = Entry.objects.get(title='This is the second title')
-        self.entry_1 = Entry.objects.get(slug='first-post')
+        self.entry_1 = Entry.objects.get(slug='this-is-the-second-title')
+
 
         # We also build a detail URI, since we will be using it all over.
         # DRY, baby. DRY.
-        self.detail_url = '/api/v1/entry/{0}/'.format(self.entry_1.pk)
+        #self.detail_url = '/api/v1/entry/{0}/'.format(self.entry_1.pk)
 
         # The data we'll send on POST requests. Again, because we'll use it
         # frequently (enough).
-        self.post_data = {
-            'user': '/api/v1/user/{0}/'.format(self.user.pk),
-            'title': 'Second Post!',
-            'slug': 'second-post',
-            'created': '2012-05-01T22:05:12'
-        }
-
-
-    # def get_credentials(self):
-    #     return self.create_basic(username=self.username, password=self.password)
-
+        # self.post_data = {
+        #     'user': '/api/v1/user/{0}/'.format(self.user.pk),
+        #     'title': 'Second Post!',
+        #     'slug': 'second-post',
+        #     'created': '2012-05-01T22:05:12'
+        # }
 
     def test_get_list_unauthorized(self):
-        self.assertHttpUnauthorized(self.api_client.get('/api/v1/entry/', format='json'))
+        self.assertHttpUnauthorized(self.api_client.get('/api/v1/user/', format='json'))
 
+    def test_working_case(self):
+        client = Client()
+        get_user_url = reverse('api_dispatch_list', kwargs={'resource_name': 'user', 'api_name': 'v1'})
+        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar')
+        response = client.get(wrapped_url)
+        self.assertEqual(response.status_code, 200)
 
-        # def test_get_list_json(self):
-        #     resp = self.api_client.get('/api/v1/entries/', format='json', authentication=self.get_credentials())
-        #     self.assertValidJSONResponse(resp)
-        #
-        #     # Scope out the data for correctness.
-        #     self.assertEqual(len(self.deserialize(resp)['objects']), 12)
-        #     # Here, we're checking an entire structure for the expected data.
-        #     self.assertEqual(self.deserialize(resp)['objects'][0], {
-        #         'pk': str(self.entry_1.pk),
-        #         'user': '/api/v1/user/{0}/'.format(self.user.pk),
-        #         'title': 'First post',
-        #         'slug': 'first-post',
-        #         'created': '2012-05-01T19:13:42',
-        #         'resource_uri': '/api/v1/entry/{0}/'.format(self.entry_1.pk)
-        #     })
+    def test_get_list_json(self):
+        resp = self.api_client.get(oauth2_wrap('/api/v1/entry/', 'foo', 'bar'))
+        self.assertValidJSONResponse(resp)
+        self.assertEqual(len(self.deserialize(resp)['objects']), 5)
+        self.assertEqual(self.deserialize(resp)['objects'][1], {
+            'id': int(str(self.entry_1.pk)),
+            'user': '/api/v1/user/{0}/'.format(self.user.pk),
+            'title': 'This is the second title',
+            'slug': 'this-is-the-second-title',
+            'body': 'This is the second body',
+            'pub_date': '2014-01-17T00:03:23',
+            'resource_uri': '/api/v1/entry/{0}/'.format(self.entry_1.pk)
+        })
         #
         # def test_get_list_xml(self):
         #     self.assertValidXMLResponse(self.api_client.get('/api/v1/entries/', format='xml', authentication=self.get_credentials()))

@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from tastypie import fields
 from polls.models import Entry, Poll, Choice
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-# from tastypie.authentication import ApiKeyAuthentication
-from authentication import OAuth20Authentication
+from tastypie.serializers import Serializer
+from happyhour.api.authentication import MultiAuthentication, BouncerCookieAuthentication, MultipleValueTwoLeggedOAuthAuthentication
 
 
 class UserResource(ModelResource):
@@ -18,6 +18,7 @@ class UserResource(ModelResource):
         filtering = {
             'username': ALL,
         }
+        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 class EntryResource(ModelResource):
@@ -35,6 +36,7 @@ class EntryResource(ModelResource):
         }
         #authorization = DjangoAuthorization()
         #authentication = OAuth20Authentication()
+        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 class PollResource(ModelResource):
@@ -45,6 +47,7 @@ class PollResource(ModelResource):
         filtering = {
             'question': ALL,
         }
+        serializer = Serializer(formats=['json'])
         authorization = Authorization()
         #authorization = DjangoAuthorization()
         #authentication = OAuth20Authentication()
