@@ -33,9 +33,8 @@ class EntryResource(ModelResource):
         filtering = {
             'user': ALL_WITH_RELATIONS,
             'pub_date': ['exact', 'lt', 'lte', 'gte', 'gt'],
+            'slug': ALL,
         }
-        #authorization = DjangoAuthorization()
-        #authentication = OAuth20Authentication()
         authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
