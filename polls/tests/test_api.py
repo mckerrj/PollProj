@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from happyhour.api.clients import oauth2_wrap
 import urllib
 import datetime
+import pytz
+from django.conf import settings
 
 
 class TestsEntryResource(ResourceTestCase):
@@ -25,6 +27,7 @@ class TestsEntryResource(ResourceTestCase):
         # Note that we aren't using PKs because they can change depending
         # on what other tests are running.
         self.entry_1 = Entry.objects.get(slug='this-is-the-second-title')
+        #self.entry_1 = Entry.objects.get(pk=9)
 
         # The data we'll send on POST requests. Again, because we'll use it
         # frequently (enough).
@@ -100,33 +103,35 @@ class TestsEntryResource(ResourceTestCase):
 
         get_user_url = reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})
         params = {'slug': 'post-in-a-test-post'}
-        wrapped_url = oauth2_wrap('%s?%s' % (get_user_url, urllib.urlencode(params)), 'foo', 'bar', method='GET')
+        wrapped_url = oauth2_wrap('%s?%s' % (get_user_url, urllib.urlencode(params)), 'foo', 'bar')
         response = self.api_client.get(wrapped_url, format='json')
         self.assertEqual(self.deserialize(response)['objects'][0]['title'], 'Post in a test Post!')
         self.assertEqual(self.deserialize(response)['objects'][0]['body'], 'This is an automated test body')
         self.assertEqual(self.deserialize(response)['objects'][0]['pub_date'], '2011-05-01T22:05:12')
 
-    # def test_put_detail(self):
-    #     # Grab the current data & modify it slightly.
-    #     original_data = self.deserialize(self.api_client.get(self.detail_url, format='json', authentication=self.get_credentials()))
-    #     new_data = original_data.copy()
-    #     new_data['title'] = 'Updated: First Post'
-    #     new_data['created'] = '2012-05-01T20:06:12'
-    #
-    #     self.assertEqual(Entry.objects.count(), 5)
-    #     self.assertHttpAccepted(self.api_client.put(self.detail_url, format='json', data=new_data, authentication=self.get_credentials()))
-    #     # Make sure the count hasn't changed & we did an update.
-    #     self.assertEqual(Entry.objects.count(), 5)
-    #     # Check for updated data.
-    #     self.assertEqual(Entry.objects.get(pk=25).title, 'Updated: First Post')
-    #     self.assertEqual(Entry.objects.get(pk=25).slug, 'first-post')
-    #     self.assertEqual(Entry.objects.get(pk=25).created, datetime.datetime(2012, 3, 1, 13, 6, 12))
+    def test_put_entry_detail(self):
+        # Grab the current data & modify it slightly.
+        #original_data = self.deserialize(self.api_client.get(self.detail_url, format='json', authentication=self.get_credentials()))
+        get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
+        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar')
+        original_data = self.deserialize(self.api_client.get(wrapped_url, format='json'))
 
+        new_data = original_data.copy()
+        new_data['title'] = 'Updated: First Post'
+        new_data['pub_date'] = '2012-10-21T20:06:12'
 
-        # def test_delete_detail_unauthenticated(self):
-        #     self.assertHttpUnauthorized(self.api_client.delete(self.detail_url, format='json'))
-        #
-        # def test_delete_detail(self):
-        #     self.assertEqual(Entry.objects.count(), 5)
-        #     self.assertHttpAccepted(self.api_client.delete(self.detail_url, format='json', authentication=self.get_credentials()))
-        #     self.assertEqual(Entry.objects.count(), 4)
+        self.assertEqual(Entry.objects.count(), 5)
+        get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
+        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar', method='PUT')
+        self.assertHttpAccepted(self.api_client.put(wrapped_url, format='json', data=new_data))
+        self.assertEqual(Entry.objects.count(), 5)
+        self.assertEqual(Entry.objects.get(pk=self.entry_1.pk).title, 'Updated: First Post')
+        self.assertEqual(Entry.objects.get(pk=self.entry_1.pk).pub_date,
+                         datetime.datetime(2012, 10, 21, 20, 06, 12, tzinfo=pytz.timezone(settings.TIME_ZONE)))
+
+    def test_delete_detail(self):
+        self.assertEqual(Entry.objects.count(), 5)
+        get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
+        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar', method='DELETE')
+        self.assertHttpAccepted(self.api_client.delete(wrapped_url, format='json'))
+        self.assertEqual(Entry.objects.count(), 4)
