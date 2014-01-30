@@ -11,8 +11,6 @@ from django.conf import settings
 
 
 class TestsEntryResource(ResourceTestCase):
-    # Use ``fixtures`` & ``urls`` as normal. See Django's ``TestCase``
-    # documentation for the gory details.
     fixtures = ['data.json']
 
     def setUp(self):
@@ -27,7 +25,6 @@ class TestsEntryResource(ResourceTestCase):
         # Note that we aren't using PKs because they can change depending
         # on what other tests are running.
         self.entry_1 = Entry.objects.get(slug='this-is-the-second-title')
-        #self.entry_1 = Entry.objects.get(pk=9)
 
         # The data we'll send on POST requests. Again, because we'll use it
         # frequently (enough).
@@ -39,12 +36,11 @@ class TestsEntryResource(ResourceTestCase):
         }
 
     def test_get_list_unauthorized(self):
-        self.assertHttpUnauthorized(self.api_client.get('/api/v1/user/', format='json'))
+        self.assertHttpUnauthorized(self.api_client.get('/api/v1/entry/', format='json'))
 
     # Done a different way just for giggles.  More abstract, more complex than above.
     def test_get_list__entry_unauthorized(self):
         self.assertHttpUnauthorized(self.api_client.get(reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})))
-
 
     def test_working_case_user_list(self):
         get_user_url = reverse('api_dispatch_list', kwargs={'resource_name': 'user', 'api_name': 'v1'})
@@ -110,8 +106,6 @@ class TestsEntryResource(ResourceTestCase):
         self.assertEqual(self.deserialize(response)['objects'][0]['pub_date'], '2011-05-01T22:05:12')
 
     def test_put_entry_detail(self):
-        # Grab the current data & modify it slightly.
-        #original_data = self.deserialize(self.api_client.get(self.detail_url, format='json', authentication=self.get_credentials()))
         get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
         wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar')
         original_data = self.deserialize(self.api_client.get(wrapped_url, format='json'))
@@ -129,7 +123,7 @@ class TestsEntryResource(ResourceTestCase):
         self.assertEqual(Entry.objects.get(pk=self.entry_1.pk).pub_date,
                          datetime.datetime(2012, 10, 21, 20, 06, 12, tzinfo=pytz.timezone(settings.TIME_ZONE)))
 
-    def test_delete_detail(self):
+    def test_delete_entry_detail(self):
         self.assertEqual(Entry.objects.count(), 5)
         get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
         wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar', method='DELETE')
