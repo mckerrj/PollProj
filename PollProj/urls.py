@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from polls import views
 from polls.api import EntryResource, UserResource, PollResource, ChoiceResource
+from polls.twitter_api import TweetResource
 from tastypie.api import Api
 
 admin.autodiscover()
@@ -11,6 +12,7 @@ v1_api.register(UserResource())
 v1_api.register(EntryResource())
 v1_api.register(PollResource())
 v1_api.register(ChoiceResource())
+v1_api.register(TweetResource())
 
 urlpatterns = patterns('',
     # Examples:
