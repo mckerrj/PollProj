@@ -1,5 +1,4 @@
-from tastypie.resources import ModelResource
-from tastypie.authorization import DjangoAuthorization, Authorization
+from tastypie.authorization import Authorization
 from django.contrib.auth.models import User
 from tastypie import fields
 from polls.models import Entry, Poll, Choice
@@ -35,6 +34,7 @@ class EntryResource(ModelResource):
             'pub_date': ['exact', 'lt', 'lte', 'gte', 'gt'],
             'slug': ALL,
         }
+        serializer = Serializer()
         authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
@@ -46,10 +46,6 @@ class PollResource(ModelResource):
         filtering = {
             'question': ALL,
         }
-        serializer = Serializer(formats=['json'])
-        authorization = Authorization()
-        #authorization = DjangoAuthorization()
-        #authentication = OAuth20Authentication()
 
 
 class ChoiceResource(ModelResource):
@@ -63,5 +59,3 @@ class ChoiceResource(ModelResource):
             'poll': ALL_WITH_RELATIONS,
             'choice_text': ALL,
         }
-
-
