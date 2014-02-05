@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'provider',
     'provider.oauth2',
     'tastypie_two_legged_oauth',
+    'djcelery'
 )
 
 TEMPLATE_DIRS = (
@@ -105,3 +106,33 @@ TASTYPIE_DEFAULT_FORMATS = ['json']
 FIXTURE_DIRS = (
       os.path.join(BASE_DIR, 'polls/tests/fixtures'),
       )
+
+# Celery stuff
+BROKER_URL = 'redis://192.168.33.10:6379/0'
+CELERY_RESULT_BACKEND = 'redis://192.168.33.10:6379/0'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']  # Ignore other content
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ENABLE_UTC = True
+
+from datetime import timedelta
+from celery.schedules import crontab
+
+# Showing timedelta and crontab style
+# more docos here: http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
+CELERYBEAT_SCHEDULE = {
+    'add-every-30-seconds': {
+        'task': 'polls.tasks.add',
+        'schedule': timedelta(seconds=30),
+        'args': (16, 16)
+    },
+    'hello-every-10-seconds': {
+        'task': 'polls.tasks.hello',
+        'schedule': timedelta(seconds=10)
+    },
+    'run-twitter-sync-every-5-minutes': {
+        'task': 'polls.tasks.run_twitter_sync',
+        'schedule': crontab(minute='*/10')
+    },
+}
+
