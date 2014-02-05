@@ -54,7 +54,7 @@ def sync_tweets_and_users(data):
         }
         Tweet.objects.get_or_create(id=data[tweet]['id'], defaults=t_fields)
 
-# This works gracefully too, but is effecteviely updating user if any changes.
+# This works gracefully too, but is effectively updating user if any changes.
 def sync_tweets_and_users_simplesave(data):
     for tweet in range(len(data)):
         tu = TwitterUser(id=data[tweet]['user']['id'],
