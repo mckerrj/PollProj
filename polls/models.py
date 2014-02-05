@@ -47,27 +47,32 @@ class Entry(models.Model):
         return super(Entry, self).save(*args, **kwargs)
 
 
-class Tweet(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    id_str = models.CharField(max_length=200)
-    text = models.CharField(max_length=200)
-    created_at = models.DateTimeField(blank=True, null=True)
-    favorite_count = models.IntegerField()
-    favorited = models.BooleanField()
-
-    def __unicode__(self):
-        return u'ID: %s, Text: %s' % (self.id_str, self.text)
-
 class TwitterUser(models.Model):
     id = models.BigIntegerField(primary_key=True)
     id_str = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     screen_name = models.CharField(max_length=200)
-    # followers_count = models.IntegerField
-    # friends_count = models.IntegerField
-    # profile_image_url = models.CharField(max_length=255)
-    # profile_image_url_https = models.CharField(max_length=255)
-    # retweet_count = models.IntegerField
-    # favorite_count = models.IntegerField
-    # lang = models.CharField(max_length=10)
+    followers_count = models.IntegerField()
+    friends_count = models.IntegerField()
+    profile_image_url = models.CharField(max_length=255)
+    profile_image_url_https = models.CharField(max_length=255)
+    lang = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return u'ID: %s, screen_name: %s' % (self.id_str, self.screen_name)
+
+
+class Tweet(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    id_str = models.CharField(max_length=200)
+    twitter_user = models.ForeignKey(TwitterUser)
+    text = models.CharField(max_length=200)
+    created_at = models.DateTimeField(blank=True, null=True)
+    favorite_count = models.IntegerField()
+    favorited = models.BooleanField()
+    retweet_count = models.IntegerField()
+    lang = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return u'ID: %s, Text: %s' % (self.id_str, self.text)
 
