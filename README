@@ -1,0 +1,9 @@
+This app is a simple app to combine some tutorials and display some of the technologies we us.
+
+Things in here:
+
+1) The DJango Tutorial with some goodness added.
+2) Tastypie tutorial plus more.
+3) Using unit tests with Django and Tastypie
+4) A simple tutorial (not from another site/tech) that show's how to
+  a) Use our Multi-authentication to create and access a Tastypie REST API
