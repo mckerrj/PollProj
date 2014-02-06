@@ -7,3 +7,28 @@ Things in here:
 3) Using unit tests with Django and Tastypie
 4) A simple tutorial (not from another site/tech) that show's how to
   a) Use our Multi-authentication to create and access a Tastypie REST API
+
+
+Some basic assumptions:
+  1) You know stuff like MySQL, Git, some basic Linux/Unix
+  2) You can handle some basic python stuff like virtualenv, pip
+  3) You can figure out some of the basic settings for DJango on your own.  Some I'll cover, others you need to sort
+  4) ?
+
+Getting Started and Setting it all up.
+  1) Checkout the PollProj repository.
+  2) Create virtual env
+  4) Activate virtualenv
+  5) Install stuff
+  6) You will need a MySQL instance with a database called 'poll', a username 'poll' and a password 'poll314' (yes that's pollpie)
+    - Assuming you're on localhost, your DATABASES setting in your Django settings.py file looks like
+      DATABASES = {
+          'default': {
+              'ENGINE': 'django.db.backends.mysql',
+              'NAME': 'poll',
+              'USER': 'poll',
+              'PASSWORD': 'poll314',
+              'HOST': '127.0.0.1',
+              'PORT': '3306',
+          }
+      }
