@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -69,7 +70,7 @@ WSGI_APPLICATION = 'PollProj.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-     'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'poll',
         'USER': 'poll',
@@ -104,8 +105,8 @@ API_LIMIT_PER_PAGE = 20
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
 FIXTURE_DIRS = (
-      os.path.join(BASE_DIR, 'polls/tests/fixtures'),
-      )
+    os.path.join(BASE_DIR, 'polls/tests/fixtures'),
+)
 
 # Celery stuff
 BROKER_URL = 'redis://192.168.33.10:6379/0'
@@ -132,7 +133,6 @@ CELERYBEAT_SCHEDULE = {
     },
     'run-twitter-sync-every-5-minutes': {
         'task': 'polls.tasks.run_twitter_sync',
-        'schedule': crontab(minute='*/10')
+        'schedule': crontab(minute='*/5')
     },
 }
-
