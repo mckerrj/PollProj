@@ -16,11 +16,27 @@ Some basic assumptions:
   4) ?
 
 Getting Started and Setting it all up.
-  1) Checkout the PollProj repository.
+  1) Checkout the PollProj repository. Location: https://github.com/mckerrj/PollProj.git  ** Need to move to SocialCode repo
   2) Create virtual env
-  4) Activate virtualenv
+    - If you've not gotten pip installed, you should do that (or some tool for installing Python stuff)
+    - Install virtualenv (See here for docs: http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+    - Create a virlualenv somewhere using 'virtualenv env'
+  4) Activate virtualenv using 'source env/bin/activate' in the same directory from which you created the virtualenv
   5) Install stuff
-  6) You will need a MySQL instance with a database called 'poll', a username 'poll' and a password 'poll314' (yes that's pollpie)
+    - Django 1.6.x
+    - celery
+    - django-celery
+    - django-tastypie
+    - oauth2
+    - django-tastypie-two-legged-oauth.  For this you have to use git.  so. pip install git+https://github.com/webjunkie/django-tastypie-two-legged-oauth
+    - django-oauth2-provider
+    - mysql-python
+    - SocialCode's own frenchpress goodness: pip install git+https://github.com/SocialCodeInc/frenchpress
+    - SocialCode's own happyhour goodness: pip install git+https://github.com/SocialCodeInc/happyhour
+    - requests-oauthlib
+    - redis
+
+  6) You will need a MySQL instance with a database called 'poll', a username 'poll' and a password 'poll314' (yes that's "pollpie")
     - Assuming you're on localhost, your DATABASES setting in your Django settings.py file looks like
       DATABASES = {
           'default': {
