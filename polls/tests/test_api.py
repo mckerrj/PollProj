@@ -17,7 +17,7 @@ class TestsEntryResource(ResourceTestCase):
         super(TestsEntryResource, self).setUp()
 
         # Create a user.
-        self.username = 'mckerrj'
+        self.username = 'admin'
         self.user = User.objects.get(username=self.username)
         self.consumer = OAuthConsumer.objects.create(name='Test', key='foo', secret='bar')
 
