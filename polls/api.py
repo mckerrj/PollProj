@@ -21,7 +21,6 @@ class UserResource(ModelResource):
 
 
 class EntryResource(ModelResource):
-    #user = fields.ForeignKey(UserResource, 'user')
     # toOne with full=True loads related fields at runtime rather than linking
     user = fields.ToOneField(UserResource, 'user')
 
@@ -34,7 +33,6 @@ class EntryResource(ModelResource):
             'pub_date': ['exact', 'lt', 'lte', 'gte', 'gt'],
             'slug': ALL,
         }
-        serializer = Serializer()
         authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
