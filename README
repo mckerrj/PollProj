@@ -1,19 +1,32 @@
 This app is a simple app to combine some tutorials and display some of the technologies we us.
 
-Things in here:
+This tutorial is actually a mixture of code from some different places:
+1) Django: Use the standard Django Polls tutorial and add some extra sauce in Models, Urls, Tests, that sort of thing.
+2) Tastypie: Use the standard Tastypie model and also add extra sauce in Models, Apis, Tests.  http://django-tastypie.readthedocs.org/en/latest/
+3) Secure an API: Will Larson's "Service Authentication" found here: https://socialcode.atlassian.net/wiki/display/ENG/Service+Authentication
+4) Use Celery to run jobs
+5) Put (most) of it together:
+  - A simple app that access your own personal twitter account, pulls the latest information from your timeline (Tweets and User info)
+  - Deserializes the JSON to DJango Model objects (mapped to Twitter REST data) and stores them in a couple of different ways.
+  - Uses a celery job to check every 10 minutes for new Tweets on your timeline.  It'll also update our local database with certain changes you made
+    to your Twitter user profile (like username, or profile pic url, that sort of thing).
+    - Use Redis for the Celery broker transport.  You don't really need to know much about redis, but it's good to have at least a basic awareness
+      since we currently make use of it.
+  - NOT DONE: Publish APIs show specific data you've pulled from twitter (using Tastypie again).  Secure those APIs
+  - NOT DONE: Have a simple front end app access those APIs
+  - NOT DONE: How to use our infrastructure to deploy an app!
+  - Other: Some simple stuff like how to access some of the APIs, sample data, that sort of thing.
 
-1) The DJango Tutorial with some goodness added.
-2) Tastypie tutorial plus more.
-3) Using unit tests with Django and Tastypie
-4) A simple tutorial (not from another site/tech) that show's how to
-  a) Use our Multi-authentication to create and access a Tastypie REST API
-
+Notes on Code:
+  - The Django and Tastypie tutorial code is from their sites, except I've added/changed things
+  - The Twitter code is all ours.
+  - The Celery code is simple, but also a mixture of their tutorial stuff and my stuff for the twitter app
 
 Some basic assumptions:
   1) You know stuff like MySQL, Git, some basic Linux/Unix
   2) You can handle some basic python stuff like virtualenv, pip
   3) You can figure out some of the basic settings for DJango on your own.  Some I'll cover, others you need to sort
-  4) ?
+  4) You can figure out how to install Redis and access it.  I used a vagrant box, don't care how you do it.
 
 Getting Started and Setting it all up.
   1) Checkout the PollProj repository. Location: https://github.com/mckerrj/PollProj.git  ** Need to move to SocialCode repo
@@ -48,3 +61,27 @@ Getting Started and Setting it all up.
               'PORT': '3306',
           }
       }
+
+  7) Install and setup a redis server.  Then edit the settings.py file for your redis settings.
+     Make sure to change IP, Port, and db number appropriately.
+      BROKER_URL = 'redis://192.168.33.10:6379/0'
+      CELERY_RESULT_BACKEND = 'redis://192.168.33.10:6379/0'
+
+  8) You'll need to run syncdb: python manage.py syncdb
+
+  9) I've got some simple fixture data in polls/tests/fixtures that will be used in tests, but it might be nice to also have the data for using the
+     running system.  So, if you want it, run "python manage.py loaddata <your-path>/PollProj/PollProj/polls/tests/fixtures/data.json"
+     running this WILL LIKELY OVERWRITE THE ADMIN USER CREATED WHEN YOU DID SYNCDB.  Admin username and password for Django Admin
+     will be
+      - username: admin
+      - password: admin314
+    It'll create some "poll" entries, "entry" entries, and a user related to those "entry" entries.
+
+  10) You should now be able to do stuff.  You can
+    - Start the Django server and do some stuff.
+      - python manage.py runserver
+      - Python managy.py test
+        - running all of the tests will work EXCEPT the tests in twitter_sync.py.  Please
+          go to the section about setting up your twitter service to get into that.
+
+  GO TO THE README2 FILE TO GET INTO THE INDIVIDUAL APPS.
