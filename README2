@@ -1,0 +1,14 @@
+
+This is an in-depth description of the the apps, technologies contained in this tutorial.
+
+1) Poll app: I'm not going into detail on the Poll app, I've just left the code in here as a reference.  You may notice that I've added little bits
+here and there like __unicde__ functions in the Models, and changed tests, but those are exploratory.  For in depth docs on Poll app, use Django's
+documentation, you'll get much more out of it.
+
+2) The Tastypie tutorial app.  This is also roughly the same as the Tastypie tutorial.
+Plesae refer here: http://django-tastypie.readthedocs.org/en/latest/tutorial.html
+The reason I'm keeping this app in the tutorial is more for the tests than for the Model/API stuff. There are some different testing elements that
+I've added to show some simple serialization/deserialization for tests, and how to run them.  I've added comments in the code to show these. Those are
+in tests/test_api.py
+
+3)
