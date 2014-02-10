@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from polls import views
-from polls.api import EntryResource, UserResource, PollResource, ChoiceResource
-from polls.twitter_api import TweetResource
+from polls.api import EntryResource, UserResource, PollResource, ChoiceResource, TweetResource
 from tastypie.api import Api
 
 admin.autodiscover()
