@@ -85,3 +85,10 @@ Getting Started and Setting it all up.
           go to the section about setting up your twitter service to get into that.
 
   GO TO THE README2 FILE TO GET INTO THE INDIVIDUAL APPS.
+
+TODOs
+- Change url in twitter_sync.api, and keys.  Tell user how te set it up.
+- # To run this app go to prod root and, "celery --app=PollProj worker --loglevel=info -B"
+- Figure out bouncer auth and use.
+- Deployment
+- Front end
