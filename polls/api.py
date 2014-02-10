@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from tastypie import fields
 from polls.models import Entry, Poll, Choice
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from tastypie.serializers import Serializer
 from happyhour.api.authentication import MultiAuthentication, BouncerCookieAuthentication, MultipleValueTwoLeggedOAuthAuthentication
 
 
