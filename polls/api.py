@@ -13,6 +13,7 @@ class UserResource(ModelResource):
         excludes = ['email', 'password']  # Excludes fields
         #  fields = ['email', 'password']  # white list of fields style
         allowed_methods = ['get']
+        authorization = Authorization()
         filtering = {
             'username': ALL,
         }
@@ -49,7 +50,7 @@ class ChoiceResource(ModelResource):
     poll = fields.ToOneField(PollResource, 'poll', full=True)
 
     class Meta:
-        queryset = Choice.objects.all();
+        queryset = Choice.objects.all()
         resource_name = 'choice'
         always_return_date = True
         filtering = {
