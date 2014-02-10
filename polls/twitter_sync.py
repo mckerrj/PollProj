@@ -8,6 +8,7 @@ OAUTH_TOKEN = '260431924-oAqZnVPosiGssJMLWTFlpdE1x9Xnc379RmyafpX7'
 OAUTH_TOKEN_SECRET = 'wKOyRxjjDiJZMOBJwzcZcc0FZvaEYwjqCBZGHaP1SSlJA'
 CONSUMER_KEY = 'qLh1cmWyqZpMWhfWKIHew'
 CONSUMER_SECRET = 'JqLTPD1UN5d5Yzev82tBLSexIdMHmRMdlu1Ml9vig'
+API_URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=newtMcKerr'
 
 
 def get_oauth():
@@ -19,9 +20,9 @@ def get_oauth():
 
 
 # todo add exception handling?
-def call_for_data_json(url):
+def call_for_timeline_data_json():
     oauth = get_oauth()
-    response = requests.get(url=url, auth=oauth)
+    response = requests.get(url=API_URL, auth=oauth)
     # A bunch of random stuff to play with how response works and what data/formats can be retrieved.
     #print(response.encoding)
     #print(response.content)
