@@ -14,10 +14,8 @@ v1_api.register(ChoiceResource())
 v1_api.register(TweetResource())
 v1_api.register(TwitterUserResource())
 
+
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'PollProj.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', views.IndexView.as_view(), name='index'),
     # url(r'^polls/$', views.index, name='index'),
