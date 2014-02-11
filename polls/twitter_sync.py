@@ -30,7 +30,8 @@ def call_for_timeline_data_json():
     #data = simplejson.loads(response.content)
     return response.json()
 
-
+# get_or_create seems obvious, but short circuits if exists.  Not using returned boolean
+# for update like I probably should
 def sync_tweets_and_users(data):
     for tweet in range(len(data)):
         tu_fields = {'id_str': data[tweet]['user']['id_str'],
