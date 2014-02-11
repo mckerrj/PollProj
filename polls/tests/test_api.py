@@ -57,8 +57,8 @@ class TestsEntryResource(ResourceTestCase):
         self.assertValidJSONResponse(response)
 
     def test_get_list_entry_json(self):
-        get_user_url = reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})
-        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar')
+        get_entry_url = reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})
+        wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar')
         response = self.api_client.get(wrapped_url, format='json')
         self.assertValidJSONResponse(response)
         self.assertEqual(len(self.deserialize(response)['objects']), 5)
@@ -73,8 +73,8 @@ class TestsEntryResource(ResourceTestCase):
         })
 
     def test_get_entry_json(self):
-        get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
-        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar')
+        get_entry_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
+        wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar')
         response = self.api_client.get(wrapped_url, format='json')
         self.assertValidJSONResponse(response)
         self.assertKeys(self.deserialize(response), ['id', 'user', 'pub_date', 'title', 'slug', 'body', 'resource_uri'])
@@ -92,22 +92,22 @@ class TestsEntryResource(ResourceTestCase):
 
     def test_post_entry_list(self):
         self.assertEqual(Entry.objects.count(), 5)
-        get_user_url = reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})
-        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar', method='POST')
+        get_entry_url = reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})
+        wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar', method='POST')
         self.api_client.post(wrapped_url, format='json', data=self.post_data)
         self.assertEqual(Entry.objects.count(), 6)
 
-        get_user_url = reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})
+        get_entry_url = reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})
         params = {'slug': 'post-in-a-test-post'}
-        wrapped_url = oauth2_wrap('%s?%s' % (get_user_url, urllib.urlencode(params)), 'foo', 'bar')
+        wrapped_url = oauth2_wrap('%s?%s' % (get_entry_url, urllib.urlencode(params)), 'foo', 'bar')
         response = self.api_client.get(wrapped_url, format='json')
         self.assertEqual(self.deserialize(response)['objects'][0]['title'], 'Post in a test Post!')
         self.assertEqual(self.deserialize(response)['objects'][0]['body'], 'This is an automated test body')
         self.assertEqual(self.deserialize(response)['objects'][0]['pub_date'], '2011-05-01T22:05:12')
 
     def test_put_entry_detail(self):
-        get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
-        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar')
+        get_entry_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
+        wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar')
         original_data = self.deserialize(self.api_client.get(wrapped_url, format='json'))
 
         new_data = original_data.copy()
@@ -115,8 +115,8 @@ class TestsEntryResource(ResourceTestCase):
         new_data['pub_date'] = '2012-10-21T20:06:12'
 
         self.assertEqual(Entry.objects.count(), 5)
-        get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
-        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar', method='PUT')
+        get_entry_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
+        wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar', method='PUT')
         self.assertHttpAccepted(self.api_client.put(wrapped_url, format='json', data=new_data))
         self.assertEqual(Entry.objects.count(), 5)
         self.assertEqual(Entry.objects.get(pk=self.entry_1.pk).title, 'Updated: First Post')
@@ -125,7 +125,7 @@ class TestsEntryResource(ResourceTestCase):
 
     def test_delete_entry_detail(self):
         self.assertEqual(Entry.objects.count(), 5)
-        get_user_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
-        wrapped_url = oauth2_wrap(get_user_url, 'foo', 'bar', method='DELETE')
+        get_entry_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'entry', 'api_name': 'v1', 'pk': self.entry_1.pk})
+        wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar', method='DELETE')
         self.assertHttpAccepted(self.api_client.delete(wrapped_url, format='json'))
         self.assertEqual(Entry.objects.count(), 4)
