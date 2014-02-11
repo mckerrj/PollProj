@@ -4,6 +4,7 @@ from tastypie import fields
 from polls.models import Entry, Poll, Choice, Tweet, TwitterUser
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from happyhour.api.authentication import MultiAuthentication, BouncerCookieAuthentication, MultipleValueTwoLeggedOAuthAuthentication
+from django.conf.urls import url
 
 
 class UserResource(ModelResource):
@@ -59,12 +60,23 @@ class ChoiceResource(ModelResource):
         }
 
 
+# - resource_name will be mapped to the url, so you'll be hitting
+#   /api/v1/twitteruser
+#   Adding this note to show that it's NOT the same as field mapping (seen below in TweerResource in the FK reference
+# - Since data should get pulled from twitter, only method allowed is ['get']
 class TwitterUserResource(ModelResource):
     class Meta:
         queryset = TwitterUser.objects.all()
-        resource_name = 'twitter_user'
-        #authorization = Authorization()
-        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+        resource_name = 'twitteruser'
+        allowed_methods = ['get']
+        detail_uri_name = 'screen_name'
+
+        def prepend_urls(self):
+            return [
+                url(r"^(?P<resource_name>%s)/(?P<screen_name>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
+            ]
+        authorization = Authorization()
+        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 class TweetResource(ModelResource):
@@ -73,14 +85,9 @@ class TweetResource(ModelResource):
     class Meta:
         queryset = Tweet.objects.all()
         resource_name = 'tweet'
+        allowed_methods = ['get']
         filtering = {
             'twitter_user': ALL_WITH_RELATIONS,
         }
-        #authorization = Authorization()
-        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
-
-
-
-
-
-
+        authorization = Authorization()
+        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
