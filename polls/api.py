@@ -7,6 +7,8 @@ from happyhour.api.authentication import MultiAuthentication, BouncerCookieAuthe
 from django.conf.urls import url
 
 
+# Pretty standard resource.  Kept to show that you can white list fields, or exclude them
+# or whitelist them.  Also easy to restrict callable methods for the REST api.
 class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
@@ -21,8 +23,9 @@ class UserResource(ModelResource):
         authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
+# Entry shows basic relationship and some more filtering options.
+# Relationship shouws path to related object.
 class EntryResource(ModelResource):
-    # toOne with full=True loads related fields at runtime rather than linking
     user = fields.ToOneField(UserResource, 'user')
 
     class Meta:
@@ -36,7 +39,7 @@ class EntryResource(ModelResource):
         authorization = Authorization()
         authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
-
+# Basic Poll, nothing to see here.
 class PollResource(ModelResource):
     class Meta:
         queryset = Poll.objects.all()
@@ -46,7 +49,8 @@ class PollResource(ModelResource):
             'question': ALL,
         }
 
-
+# Choice is pretty standard, I added full=True to the relationship to show sample data returned
+# that includes fully instantiated relationships.  The API will return a choice and it's related Poll.
 class ChoiceResource(ModelResource):
     poll = fields.ToOneField(PollResource, 'poll', full=True)
 
@@ -64,6 +68,8 @@ class ChoiceResource(ModelResource):
 #   /api/v1/twitteruser
 #   Adding this note to show that it's NOT the same as field mapping (seen below in TweerResource in the FK reference
 # - Since data should get pulled from twitter, only method allowed is ['get']
+# - The prepend_urls function shows how to modify the URL.  So to get a specific TwitterUserResource
+#   you can now call api/v1/twitteruser/<screen_name>/
 class TwitterUserResource(ModelResource):
     class Meta:
         queryset = TwitterUser.objects.all()
