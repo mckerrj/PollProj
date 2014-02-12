@@ -28,7 +28,7 @@ def call_for_timeline_data_json():
     #print(response.content)
     #print(response.json())
     #data = simplejson.loads(response.content)
-    return response.json()
+    return response
 
 # get_or_create seems obvious, but short circuits if exists.  Not using returned boolean
 # for update like I probably should
