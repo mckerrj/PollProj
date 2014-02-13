@@ -3,7 +3,6 @@ import requests
 from polls.models import Tweet, TwitterUser
 import datetime
 import pytz
-import json
 
 OAUTH_TOKEN = '260431924-oAqZnVPosiGssJMLWTFlpdE1x9Xnc379RmyafpX7'
 OAUTH_TOKEN_SECRET = 'wKOyRxjjDiJZMOBJwzcZcc0FZvaEYwjqCBZGHaP1SSlJA'
