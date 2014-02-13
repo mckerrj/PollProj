@@ -6,7 +6,7 @@ import json
 
 
 def load_twitter_data():
-    json_data = open('polls/tests/fixturesa/mocktwitter.json')
+    json_data = open('polls/tests/fixtures/mocktwitter.json')
     data1 = json.load(json_data)
     return data1
 
