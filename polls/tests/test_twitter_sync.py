@@ -10,6 +10,7 @@ def load_twitter_data():
     data1 = json.load(json_data)
     return data1
 
+
 # This is for testing the twitter_sync.sync_blah methods.  It's using a simple Mock decorator/
 # interceptor to prevent calling the actual API.  It loads data from fixtures/mocktwitter
 # that I got using the call_for_timeline_data_json method.  So it should be clean.  If you really
