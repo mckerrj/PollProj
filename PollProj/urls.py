@@ -3,6 +3,7 @@ from django.contrib import admin
 from polls import views
 from polls.api import EntryResource, UserResource, PollResource, ChoiceResource, TweetResource, TwitterUserResource
 from tastypie.api import Api
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
@@ -25,6 +26,8 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/results/$', views.ResultsView.as_view(), name='results'),
     url(r'^(?P<poll_id>\d+)/vote/$', views.vote, name='vote'),
     url(r'^api/', include(v1_api.urls)),
+    url(r'^polls/twmain/$', TemplateView.as_view(template_name='twitter_main.html'), name="twmain"),
+    url(r'^polls/twdetail/$', TemplateView.as_view(template_name='twitter_detail.html'), name="twdetail"),
     url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
 
 )
