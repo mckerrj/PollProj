@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>ToDo API Client Demo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
-<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
-</head>
-<body>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a class="brand" href="#">Twitter API Client Demo</a>
+    <head>
+        <title>ToDo API Client Demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="#">Twitter API Client Demo</a>
+            </div>
         </div>
-    </div>
-    <div id="main" class="container">
-        <table class="table table-striped">
-            <tr>
-                <td style="width: 1px;"></td>
-                <td><b>Twitter User</b></td>
-                <td><b>TweetID</b></td>
-                <td><b>Text</b></td>
-                <td><b>Date Created</b></td>
-            </tr>
-            <!-- ko foreach: tweets -->
-            <tr>
-                <td>
-                    <span data-bind="visible: created_at" class="label label-success">Yup</span>
-                </td>
-                <td><p><b data-bind="text: screen_name"></b></p></td>
-                <td><p><b data-bind="text: id"></b></p></td>
-                <td><p data-bind="text: text"></p></td>
-                <td><p data-bind="text: created_at"></p></td>
-            </tr>
-            <!-- /ko -->
-        </table>
-        <button data-bind="click: seeUser" class="btn">See User</button>
-    </div>
-    <script type="text/javascript">
-        function TasksViewModel() {
-            var self = this;
-            self.tasksURI = 'http://localhost:8000/api/v1/tweet/';
-            //self.username = "miguel";
-            //self.password = "python";
-            self.tweets = ko.observableArray();
+        <div id="main" class="container">
+            <table class="table table-striped">
+                <tr>
+                    <td style="width: 1px;"></td>
+                    <td><b>Twitter User</b></td>
+                    <td><b>TweetID</b></td>
+                    <td><b>Text</b></td>
+                    <td><b>Date Created</b></td>
+                </tr>
+                <!-- ko foreach: tweets -->
+                <tr>
+                    <td>
+                        <span data-bind="visible: created_at" class="label label-success">Yup</span>
+                    </td>
+                    <td><p><b data-bind="text: screen_name"></b></p></td>
+                    <td><p><b data-bind="text: id"></b></p></td>
+                    <td><p data-bind="text: text"></p></td>
+                    <td><p data-bind="text: created_at"></p></td>
+                </tr>
+                <!-- /ko -->
+            </table>
+            <button data-bind="click: seeUser" class="btn">See User</button>
+        </div>
+        <script type="text/javascript">
+            function TasksViewModel() {
+                var self = this;
+                self.tasksURI = 'http://localhost:8000/api/v1/tweet/';
+                //self.username = "miguel";
+                //self.password = "python";
+                self.tweets = ko.observableArray();
 
-            self.ajax = function(uri, method, data) {
-                var request = {
-                    url: uri,
-                    type: method,
-                    contentType: "application/json",
-                    Accept: "application/json",
-                    cache: false,
-                    dataType: 'json',
-                    data: JSON.stringify(data),
-                    //beforeSend: function (xhr) {
-                    //    xhr.setRequestHeader("Authorization",
-                    //        "Basic " + btoa(self.username + ":" + self.password));
-                    //},
-                    error: function(jqXHR) {
-                        console.log("ajax error " + jqXHR.status);
-                    }
-                };
-                return $.ajax(request);
-            }
-
-            self.seeUser = function() {
-                alert("USER");
-            }
-
-            self.ajax(self.tasksURI, 'GET').done(function(data) {
-                for (var i = 0; i < data.objects.length; i++) {
-                    self.tweets.push({
-                        created_at: ko.observable(data.objects[i].created_at),
-                        text: ko.observable(data.objects[i].text),
-                        id: ko.observable(data.objects[i].id),
-                        screen_name: ko.observable(data.objects[i].twitteruser.screen_name)
-                    });
+                self.ajax = function(uri, method, data) {
+                    var request = {
+                        url: uri,
+                        type: method,
+                        contentType: "application/json",
+                        Accept: "application/json",
+                        cache: false,
+                        dataType: 'json',
+                        data: JSON.stringify(data),
+                        //beforeSend: function (xhr) {
+                        //    xhr.setRequestHeader("Authorization",
+                        //        "Basic " + btoa(self.username + ":" + self.password));
+                        //},
+                        error: function(jqXHR) {
+                            console.log("ajax error " + jqXHR.status);
+                        }
+                    };
+                    return $.ajax(request);
                 }
-            });
-        }
-        ko.applyBindings(new TasksViewModel(), $('#main')[0]);
-    </script>
-</body>
+
+                self.seeUser = function() {
+                    alert("USER");
+                }
+
+                self.ajax(self.tasksURI, 'GET').done(function(data) {
+                    for (var i = 0; i < data.objects.length; i++) {
+                        self.tweets.push({
+                            created_at: ko.observable(data.objects[i].created_at),
+                            text: ko.observable(data.objects[i].text),
+                            id: ko.observable(data.objects[i].id),
+                            screen_name: ko.observable(data.objects[i].twitteruser.screen_name)
+                        });
+                    }
+                });
+            }
+            ko.applyBindings(new TasksViewModel(), $('#main')[0]);
+        </script>
+    </body>
 </html>
