@@ -24,34 +24,18 @@
                     <td><b>Date Created</b></td>
                 </tr>
                 <tbody data-bind="foreach: tweets">
-                <tr>
-                    <td>
-                        <span data-bind="visible: created_at" class="label label-success">Yup</span>
-                    </td>
-                    <td><p><b data-bind="text: screen_name"></b></p></td>
-                    <td><p><b data-bind="text: id"></b></p></td>
-                    <td><p data-bind="text: text"></p></td>
-                    <td><p data-bind="text: created_at"></p></td>
-                </tr>
+                    <tr>
+                        <td><span data-bind="visible: created_at" class="label label-success">Yup</span></td>
+                        <td><p><b data-bind="text: screen_name"></b></p></td>
+                        <td><p><b data-bind="text: id"></b></p></td>
+                        <td><p data-bind="text: text"></p></td>
+                        <td><p data-bind="text: created_at"></p></td>
+                    </tr>
                 </tbody>
             </table>
 {#            <button data-bind="click: seeUser" class="btn">See User</button>#}
         </div>
         <script type="text/javascript">
-            self.loadData = function() {
-                self.tweets([]);
-                self.ajax(self.tasksURI, 'GET').done(function(data) {
-                    for (var i = 0; i < data.objects.length; i++) {
-                        // Important: Create a new tweet object instead of using 'this' here.
-                        var tweet = {};
-                        tweet.created_at = ko.observable(data.objects[i].created_at);
-                        tweet.text = ko.observable(data.objects[i].text);
-                        tweet.id = ko.observable(data.objects[i].id);
-                        tweet.screen_name = ko.observable(data.objects[i].twitteruser.screen_name);
-                        self.tweets.push(tweet);
-                    }
-                });
-            }
             function TweetsViewModel() {
                 self.tasksURI = 'http://localhost:8000/api/v1/tweet/';
                 self.tweets = ko.observableArray();
@@ -68,10 +52,23 @@
                     };
                     return $.ajax(request);
                 }
-                self.loadData();
+                LoadData();
+            }
+            function LoadData() {
+                self.tweets([]);
+                self.ajax(self.tasksURI, 'GET').done(function(data) {
+                    for (var i = 0; i < data.objects.length; i++) {
+                        var tweet = {};
+                        tweet.created_at = ko.observable(data.objects[i].created_at);
+                        tweet.text = ko.observable(data.objects[i].text);
+                        tweet.id = ko.observable(data.objects[i].id);
+                        tweet.screen_name = ko.observable(data.objects[i].twitteruser.screen_name);
+                        self.tweets.push(tweet);
+                    }
+                });
             }
             ko.applyBindings(new TweetsViewModel());
-            setInterval(function(){self.loadData()}, 30000)
+            setInterval(function(){LoadData()}, 5000)
         </script>
     </body>
 </html>
