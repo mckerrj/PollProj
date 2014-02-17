@@ -30,8 +30,8 @@ def call_for_timeline_data_json():
     #data = simplejson.loads(response.content)
     return response.json()
 
-# get_or_create seems obvious, but short circuits if exists.  Not using returned boolean
-# for update like I probably should
+# get_or_create seems obvious, but short circuits if exists.  Keeping this here because
+# it shows the get_or_create method with returns a tuple (not show) of the object and a boolean.
 def sync_tweets_and_users(data):
     for tweet in range(len(data)):
         tu_fields = {'id_str': data[tweet]['user']['id_str'],
@@ -57,6 +57,7 @@ def sync_tweets_and_users(data):
         Tweet.objects.get_or_create(id=data[tweet]['id'], defaults=t_fields)
 
 # This works gracefully too, but is effectively updating user if any changes.
+# After 1.5, it'll update fields.
 def sync_tweets_and_users_simplesave(data):
     for tweet in range(len(data)):
         tu = TwitterUser(id=data[tweet]['user']['id'],
