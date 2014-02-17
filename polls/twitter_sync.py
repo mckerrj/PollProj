@@ -30,8 +30,10 @@ def call_for_timeline_data_json():
     #data = simplejson.loads(response.content)
     return response.json()
 
+
 # get_or_create seems obvious, but short circuits if exists.  Keeping this here because
 # it shows the get_or_create method with returns a tuple (not show) of the object and a boolean.
+# You'd use this if you DID NOT want to update changes to existing tweets or users.
 def sync_tweets_and_users(data):
     for tweet in range(len(data)):
         tu_fields = {'id_str': data[tweet]['user']['id_str'],
@@ -42,7 +44,7 @@ def sync_tweets_and_users(data):
                      'profile_image_url': data[tweet]['user']['profile_image_url'],
                      'profile_image_url_https': data[tweet]['user']['profile_image_url_https'],
                      'lang': data[tweet]['user']['lang']
-        }
+                    }
         TwitterUser.objects.get_or_create(id=data[tweet]['user']['id'], defaults=tu_fields)
 
         t_fields = {'id_str': data[tweet]['id_str'],
@@ -53,8 +55,9 @@ def sync_tweets_and_users(data):
                     'favorited': data[tweet]['favorited'],
                     'retweet_count': data[tweet]['retweet_count'],
                     'lang': data[tweet]['lang'],
-        }
+                    }
         Tweet.objects.get_or_create(id=data[tweet]['id'], defaults=t_fields)
+
 
 # This works gracefully too, but is effectively updating user if any changes.
 # After 1.5, it'll update fields.
@@ -68,7 +71,7 @@ def sync_tweets_and_users_simplesave(data):
                          profile_image_url=data[tweet]['user']['profile_image_url'],
                          profile_image_url_https=data[tweet]['user']['profile_image_url_https'],
                          lang=data[tweet]['user']['lang']
-        )
+                         )
         tu.save()
 
         t = Tweet(id=data[tweet]['id'],
@@ -79,5 +82,5 @@ def sync_tweets_and_users_simplesave(data):
                   favorited=data[tweet]['favorited'],
                   retweet_count=data[tweet]['retweet_count'],
                   lang=data[tweet]['lang']
-        )
+                  )
         t.save()
