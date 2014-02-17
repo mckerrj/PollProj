@@ -34,7 +34,7 @@ def call_for_timeline_data_json():
 # get_or_create seems obvious, but short circuits if exists.  Keeping this here because
 # it shows the get_or_create method with returns a tuple (not show) of the object and a boolean.
 # You'd use this if you DID NOT want to update changes to existing tweets or users.
-def sync_tweets_and_users(data):
+def sync_tweets_and_users_getorcreate(data):
     for tweet in range(len(data)):
         tu_fields = {'id_str': data[tweet]['user']['id_str'],
                      'name': data[tweet]['user']['name'],
@@ -61,7 +61,7 @@ def sync_tweets_and_users(data):
 
 # This works gracefully too, but is effectively updating user if any changes.
 # After 1.5, it'll update fields.
-def sync_tweets_and_users_simplesave(data):
+def sync_tweets_and_users_save(data):
     for tweet in range(len(data)):
         tu = TwitterUser(id=data[tweet]['user']['id'],
                          name=data[tweet]['user']['name'],
