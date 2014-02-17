@@ -25,15 +25,15 @@ class TestsTweetResource(ResourceTestCase):
         super(TestsTweetResource, self).setUp()
 
     @patch('polls.twitter_sync.call_for_timeline_data_json', load_twitter_data)
-    def test_get_sync_twitter_user_timeline(self):
+    def test_get_sync_twitter_user_timeline_getorcreate(self):
         self.data = twitter_sync.call_for_timeline_data_json()
-        twitter_sync.sync_tweets_and_users(self.data)
+        twitter_sync.sync_tweets_and_users_getorcreate(self.data)
         self.assertEquals(TwitterUser.objects.all().count(), 1)
         self.assertEquals(Tweet.objects.all().count(), 5)
 
     @patch('polls.twitter_sync.call_for_timeline_data_json', load_twitter_data)
-    def test_get_sync_twitter_user_timeline_simple(self):
+    def test_get_sync_twitter_user_timeline_save(self):
         self.data = twitter_sync.call_for_timeline_data_json()
-        twitter_sync.sync_tweets_and_users_simplesave(self.data)
+        twitter_sync.sync_tweets_and_users_save(self.data)
         self.assertEquals(TwitterUser.objects.all().count(), 1)
         self.assertEquals(Tweet.objects.all().count(), 5)
