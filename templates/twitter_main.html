@@ -19,6 +19,7 @@
                 <tr>
                     <td style="width: 1px;"></td>
                     <td><b>Twitter User</b></td>
+                    <td><b>Name</b></td>
                     <td><b>TweetID</b></td>
                     <td><b>Text</b></td>
                     <td><b>Date Created</b></td>
@@ -27,6 +28,7 @@
                     <tr>
                         <td><span data-bind="visible: created_at" class="label label-success">Yup</span></td>
                         <td><p><b data-bind="text: screen_name"></b></p></td>
+                        <td><p><b data-bind="text: name"></b></p></td>
                         <td><p><b data-bind="text: id"></b></p></td>
                         <td><p data-bind="text: text"></p></td>
                         <td><p data-bind="text: created_at"></p></td>
@@ -63,6 +65,7 @@
                         tweet.text = ko.observable(data.objects[i].text);
                         tweet.id = ko.observable(data.objects[i].id);
                         tweet.screen_name = ko.observable(data.objects[i].twitteruser.screen_name);
+                        tweet.name = ko.observable(data.objects[i].twitteruser.name);
                         self.tweets.push(tweet);
                     }
                 });
