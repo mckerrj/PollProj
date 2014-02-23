@@ -19,8 +19,8 @@ class UserResource(ModelResource):
         filtering = {
             'username': ALL,
         }
-        authorization = Authorization()
-        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+        #authorization = Authorization()
+        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 # Entry shows basic relationship and some more filtering options.
@@ -36,8 +36,9 @@ class EntryResource(ModelResource):
             'pub_date': ['exact', 'lt', 'lte', 'gte', 'gt'],
             'slug': ALL,
         }
-        authorization = Authorization()
-        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+        #authorization = Authorization()
+        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+
 
 # Basic Poll, nothing to see here.
 class PollResource(ModelResource):
@@ -48,6 +49,7 @@ class PollResource(ModelResource):
         filtering = {
             'question': ALL,
         }
+
 
 # Choice is pretty standard, I added full=True to the relationship to show sample data returned
 # that includes fully instantiated relationships.  The API will return a choice and it's related Poll.
@@ -81,8 +83,8 @@ class TwitterUserResource(ModelResource):
             return [
                 url(r"^(?P<resource_name>%s)/(?P<screen_name>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
             ]
-        authorization = Authorization()
-        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+        #authorization = Authorization()
+        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 class TweetResource(ModelResource):
@@ -95,5 +97,5 @@ class TweetResource(ModelResource):
         filtering = {
             'twitter_user': ALL_WITH_RELATIONS,
         }
-        authorization = Authorization()
-        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+        #authorization = Authorization()
+        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
