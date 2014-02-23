@@ -17,16 +17,16 @@ class TestsEntryResource(ResourceTestCase):
         self.consumer = OAuthConsumer.objects.create(name='Test', key='foo', secret='bar')
 
     # Showing how to do the basic get from the resource, and test to make sure it is secured.
-    def test_get_tweet_unauthorized(self):
-        self.assertHttpUnauthorized(self.api_client.get('/api/v1/tweet/', format='json'))
-
-    # This does exactly the same as the previous test, but uses DJango's reverse mechanism to build the URL  Just showing two different
-    # ways of doing it.
-    def test_get_tweet_reverse_unauthorized(self):
-        self.assertHttpUnauthorized(self.api_client.get(reverse('api_dispatch_list', kwargs={'resource_name': 'tweet', 'api_name': 'v1'})))
-
-    def test_get_twitteruser_unauthorized(self):
-        self.assertHttpUnauthorized(self.api_client.get(reverse('api_dispatch_list', kwargs={'resource_name': 'twitteruser', 'api_name': 'v1'})))
+    # def test_get_tweet_unauthorized(self):
+    #     self.assertHttpUnauthorized(self.api_client.get('/api/v1/tweet/', format='json'))
+    #
+    # # This does exactly the same as the previous test, but uses DJango's reverse mechanism to build the URL  Just showing two different
+    # # ways of doing it.
+    # def test_get_tweet_reverse_unauthorized(self):
+    #     self.assertHttpUnauthorized(self.api_client.get(reverse('api_dispatch_list', kwargs={'resource_name': 'tweet', 'api_name': 'v1'})))
+    #
+    # def test_get_twitteruser_unauthorized(self):
+    #     self.assertHttpUnauthorized(self.api_client.get(reverse('api_dispatch_list', kwargs={'resource_name': 'twitteruser', 'api_name': 'v1'})))
 
     def test_get_tweet_list(self):
         get_entry_url = reverse('api_dispatch_list', kwargs={'resource_name': 'tweet', 'api_name': 'v1'})
