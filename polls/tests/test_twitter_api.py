@@ -1,6 +1,6 @@
 from tastypie.test import ResourceTestCase
 from django.core.urlresolvers import reverse
-from tastypie_two_legged_oauth.models import OAuthConsumer
+#from tastypie_two_legged_oauth.models import OAuthConsumer
 from happyhour.api.clients import oauth2_wrap
 
 
