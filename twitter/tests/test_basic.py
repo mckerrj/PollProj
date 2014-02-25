@@ -1,7 +1,6 @@
 from django.test import TestCase
 import datetime
 from django.utils import timezone
-from django.core.urlresolvers import reverse
 from twitter.models import Poll
 
 
@@ -30,62 +29,3 @@ def create_poll(question, days):
     # `days` offset to now (negative for twitter published in the past,
     # positive for twitter that have yet to be published).
     return Poll.objects.create(question=question, pub_date=timezone.now() + datetime.timedelta(days=days))
-
-
-class PollViewTests(TestCase):
-    def test_index_view_with_no_polls(self):
-        # If no twitter exist, an appropriate message should be displayed.
-        response = self.client.get(reverse('twitter:index'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No polls are available.")
-        self.assertQuerysetEqual(response.context['latest_poll_list'], [])
-        self.assertEqual(len(response.context['latest_poll_list']), 0)
-
-    def test_index_view_with_a_past_poll(self):
-        # Polls with a pub_date in the past should be displayed on the index page.
-        create_poll(question="Past poll.", days=-30)
-        response = self.client.get(reverse('twitter:index'))
-        self.assertQuerysetEqual(response.context['latest_poll_list'], ['<Poll: Past poll.>'])
-        self.assertEqual(len(response.context['latest_poll_list']), 1)
-
-    def test_index_view_with_a_future_poll(self):
-        # Polls with a pub_date in the future should not be displayed on the
-        # index page.
-        create_poll(question="Future poll.", days=30)
-        response = self.client.get(reverse('twitter:index'))
-        self.assertContains(response, "No polls are available.", status_code=200)
-        self.assertQuerysetEqual(response.context['latest_poll_list'], [])
-        self.assertEqual(len(response.context['latest_poll_list']), 0)
-
-    def test_index_view_with_future_poll_and_past_poll(self):
-        # Even if both past and future twitter exist, only past twitter should be
-        # displayed.
-        create_poll(question="Past poll.", days=-30)
-        create_poll(question="Future poll.", days=30)
-        response = self.client.get(reverse('twitter:index'))
-        self.assertQuerysetEqual(response.context['latest_poll_list'], ['<Poll: Past poll.>'])
-        self.assertEqual(len(response.context['latest_poll_list']), 1)
-
-    def test_index_view_with_two_past_polls(self):
-        # The twitter index page may display multiple twitter.
-        create_poll(question="Past poll 1.", days=-30)
-        create_poll(question="Past poll 2.", days=-5)
-        response = self.client.get(reverse('twitter:index'))
-        self.assertQuerysetEqual(response.context['latest_poll_list'], ['<Poll: Past poll 2.>', '<Poll: Past poll 1.>'])
-        self.assertEqual(len(response.context['latest_poll_list']), 2)
-
-
-class PollIndexDetailTests(TestCase):
-    def test_detail_view_with_a_future_poll(self):
-        # The detail view of a poll with a pub_date in the future should
-        # return a 404 not found.
-        future_poll = create_poll(question='Future poll.', days=5)
-        response = self.client.get(reverse('twitter:detail', args=(future_poll.id,)))
-        self.assertEqual(response.status_code, 404)
-
-    def test_detail_view_with_a_past_poll(self):
-        # The detail view of a poll with a pub_date in the past should display
-        # the poll's question.
-        past_poll = create_poll(question='Past Poll.', days=-5)
-        response = self.client.get(reverse('twitter:detail', args=(past_poll.id,)))
-        self.assertContains(response, past_poll.question, status_code=200)
