@@ -83,8 +83,6 @@ class TwitterUserResource(ModelResource):
             return [
                 url(r"^(?P<resource_name>%s)/(?P<screen_name>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
             ]
-        #authorization = Authorization()
-        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 class TweetResource(ModelResource):
@@ -97,5 +95,3 @@ class TweetResource(ModelResource):
         filtering = {
             'twitter_user': ALL_WITH_RELATIONS,
         }
-        #authorization = Authorization()
-        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
