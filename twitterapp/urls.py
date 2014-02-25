@@ -18,15 +18,9 @@ v1_api.register(TwitterUserResource())
 
 urlpatterns = patterns('',
 
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    # url(r'^twitter/$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^twitter/', include('twitterapp.urls', namespace='twitter')),
-    url(r'^twitter/(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),
-    url(r'^(?P<pk>\d+)/results/$', views.ResultsView.as_view(), name='results'),
-    url(r'^(?P<poll_id>\d+)/vote/$', views.vote, name='vote'),
     url(r'^api/', include(v1_api.urls)),
-    url(r'^twitter/twmain/$', TemplateView.as_view(template_name='twitter_main.html'), name="twmain"),
-    url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
+    url(r'^$', TemplateView.as_view(template_name='twitter_main.html'), name="twmain"),
 
 )
