@@ -72,9 +72,9 @@ WSGI_APPLICATION = 'twitterapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'poll',
-        'USER': 'poll',
-        'PASSWORD': 'poll314',
+        'NAME': 'twitter',
+        'USER': 'twitter',
+        'PASSWORD': 'twitter314',
         'HOST': '192.168.33.10',
         'PORT': '3306',
     }
