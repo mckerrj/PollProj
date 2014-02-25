@@ -1,5 +1,5 @@
 from django.contrib import admin
-from polls.models import Poll, Choice, Entry
+from twitter.models import Poll, Choice, Entry
 
 
 admin.site.register(Poll)

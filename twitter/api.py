@@ -1,7 +1,7 @@
 from tastypie.authorization import Authorization
 from django.contrib.auth.models import User
 from tastypie import fields
-from polls.models import Entry, Poll, Choice, Tweet, TwitterUser
+from twitter.models import Entry, Poll, Choice, Tweet, TwitterUser
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from happyhour.api.authentication import MultiAuthentication, BouncerCookieAuthentication, MultipleValueTwoLeggedOAuthAuthentication
 from django.conf.urls import url

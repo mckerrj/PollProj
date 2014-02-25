@@ -1,7 +1,7 @@
 from __future__ import absolute_import
-from PollProj.celeryapp import app
-from polls import twitter_sync
-from polls.models import Tweet
+from twitterapp.celeryapp import app
+from twitter import twitter_sync
+from twitter.models import Tweet
 
 
 @app.task
