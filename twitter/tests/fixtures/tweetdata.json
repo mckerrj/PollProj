@@ -1,7 +1,7 @@
 [
   {
     "pk": 260431924,
-    "model": "polls.twitteruser",
+    "model": "twitter.twitteruser",
     "fields": {
       "lang": "en",
       "screen_name": "newtMckerr",
@@ -15,7 +15,7 @@
   },
   {
     "pk": 238746430288838656,
-    "model": "polls.tweet",
+    "model": "twitter.tweet",
     "fields": {
       "lang": "en",
       "favorited": false,
@@ -29,7 +29,7 @@
   },
   {
     "pk": 238746505589161984,
-    "model": "polls.tweet",
+    "model": "twitter.tweet",
     "fields": {
       "lang": "en",
       "favorited": false,
@@ -43,7 +43,7 @@
   },
   {
     "pk": 256126634686570497,
-    "model": "polls.tweet",
+    "model": "twitter.tweet",
     "fields": {
       "lang": "en",
       "favorited": false,
@@ -57,7 +57,7 @@
   },
   {
     "pk": 430692822119747584,
-    "model": "polls.tweet",
+    "model": "twitter.tweet",
     "fields": {
       "lang": "en",
       "favorited": false,
@@ -71,7 +71,7 @@
   },
   {
     "pk": 431429781121290240,
-    "model": "polls.tweet",
+    "model": "twitter.tweet",
     "fields": {
       "lang": "en",
       "favorited": false,

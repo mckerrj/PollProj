@@ -49,7 +49,6 @@ Getting Started and Setting it all up.
     - requests-oauthlib
     - redis
     - mock
-    - ?? May need flask
 
   6) You will need a MySQL instance with a database called 'poll', a username 'poll' and a password 'poll314' (yes that's "pollpie")
     - Assuming you're on localhost, your DATABASES setting in your Django settings.py file looks like
@@ -90,7 +89,7 @@ Getting Started and Setting it all up.
 
 TODOs
 - Change url in twitter_sync.api, and keys.  Tell user how te set it up.
-- # To run this app go to prod root and, "celery --app=PollProj worker --loglevel=info -B"
+- # To run this app go to prod root and, "celery --app=twitterapp worker --loglevel=info -B"
 - Figure out bouncer auth and use.
 - Deployment
 - Front end

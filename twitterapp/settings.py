@@ -1,5 +1,5 @@
 """
-Django settings for PollProj project.
+Django settings for twitterapp project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'polls',
+    'twitter',
     'tastypie',
     'provider',
     'provider.oauth2',
@@ -61,9 +61,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'PollProj.urls'
+ROOT_URLCONF = 'twitterapp.urls'
 
-WSGI_APPLICATION = 'PollProj.wsgi.application'
+WSGI_APPLICATION = 'twitterapp.wsgi.application'
 
 
 # Database
@@ -105,7 +105,7 @@ API_LIMIT_PER_PAGE = 20
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
 FIXTURE_DIRS = (
-    os.path.join(BASE_DIR, 'polls/tests/fixtures'),
+    os.path.join(BASE_DIR, 'twitter/tests/fixtures'),
 )
 
 # Celery stuff
@@ -123,16 +123,16 @@ from celery.schedules import crontab
 # more docos here: http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
 CELERYBEAT_SCHEDULE = {
     'add-every-30-seconds': {
-        'task': 'polls.tasks.add',
+        'task': 'twitter.tasks.add',
         'schedule': timedelta(seconds=30),
         'args': (16, 16)
     },
     'hello-every-10-seconds': {
-        'task': 'polls.tasks.hello',
+        'task': 'twitter.tasks.hello',
         'schedule': timedelta(seconds=10)
     },
     'run-twitter-sync-every-5-minutes': {
-        'task': 'polls.tasks.run_twitter_sync',
+        'task': 'twitter.tasks.run_twitter_sync',
         'schedule': crontab(minute='*/5')
     },
 }

@@ -19,7 +19,7 @@
   },
   {
     "pk": 8,
-    "model": "polls.poll",
+    "model": "twitter.poll",
     "fields": {
       "pub_date": "2014-01-18T23:29:45Z",
       "question": "Poll 1"
@@ -27,7 +27,7 @@
   },
   {
     "pk": 9,
-    "model": "polls.poll",
+    "model": "twitter.poll",
     "fields": {
       "pub_date": "2014-01-18T23:29:56Z",
       "question": "Poll 2"
@@ -35,7 +35,7 @@
   },
   {
     "pk": 10,
-    "model": "polls.poll",
+    "model": "twitter.poll",
     "fields": {
       "pub_date": "2014-01-18T23:30:05Z",
       "question": "Poll 3"
@@ -43,7 +43,7 @@
   },
   {
     "pk": 12,
-    "model": "polls.poll",
+    "model": "twitter.poll",
     "fields": {
       "pub_date": "2014-01-18T18:03:48Z",
       "question": "This is a question from a post"
@@ -51,7 +51,7 @@
   },
   {
     "pk": 8,
-    "model": "polls.choice",
+    "model": "twitter.choice",
     "fields": {
       "choice_text": "Poll 1, choice 1",
       "poll": 8,
@@ -60,7 +60,7 @@
   },
   {
     "pk": 9,
-    "model": "polls.choice",
+    "model": "twitter.choice",
     "fields": {
       "choice_text": "Poll 1, choice 2",
       "poll": 8,
@@ -69,7 +69,7 @@
   },
   {
     "pk": 10,
-    "model": "polls.choice",
+    "model": "twitter.choice",
     "fields": {
       "choice_text": "Poll 2, choice 1",
       "poll": 9,
@@ -78,7 +78,7 @@
   },
   {
     "pk": 11,
-    "model": "polls.choice",
+    "model": "twitter.choice",
     "fields": {
       "choice_text": "Poll 2, choice 2",
       "poll": 9,
@@ -87,7 +87,7 @@
   },
   {
     "pk": 8,
-    "model": "polls.entry",
+    "model": "twitter.entry",
     "fields": {
       "body": "This is the body",
       "slug": "this-is-the-title",
@@ -98,7 +98,7 @@
   },
   {
     "pk": 9,
-    "model": "polls.entry",
+    "model": "twitter.entry",
     "fields": {
       "body": "This is the second body",
       "slug": "this-is-the-second-title",
@@ -109,7 +109,7 @@
   },
   {
     "pk": 10,
-    "model": "polls.entry",
+    "model": "twitter.entry",
     "fields": {
       "body": "This will prbbly be my lst post.",
       "slug": "another-post",
@@ -120,7 +120,7 @@
   },
   {
     "pk": 12,
-    "model": "polls.entry",
+    "model": "twitter.entry",
     "fields": {
       "body": "This will probably be my last post.",
       "slug": "another-post",
@@ -131,7 +131,7 @@
   },
   {
     "pk": 13,
-    "model": "polls.entry",
+    "model": "twitter.entry",
     "fields": {
       "body": "This will prbbly be my lst post.2",
       "slug": "another-post",

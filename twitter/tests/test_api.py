@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from tastypie.test import ResourceTestCase
-from polls.models import Entry
+from twitter.models import Entry
 from tastypie_two_legged_oauth.models import OAuthConsumer
 from django.core.urlresolvers import reverse
 from happyhour.api.clients import oauth2_wrap

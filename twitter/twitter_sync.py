@@ -1,6 +1,6 @@
 from requests_oauthlib import OAuth1
 import requests
-from polls.models import Tweet, TwitterUser
+from twitter.models import Tweet, TwitterUser
 import datetime
 import pytz
 
