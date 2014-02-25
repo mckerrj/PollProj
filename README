@@ -48,6 +48,8 @@ Getting Started and Setting it all up.
     - SocialCode's own happyhour goodness: pip install git+https://github.com/SocialCodeInc/happyhour
     - requests-oauthlib
     - redis
+    - mock
+    - ?? May need flask
 
   6) You will need a MySQL instance with a database called 'poll', a username 'poll' and a password 'poll314' (yes that's "pollpie")
     - Assuming you're on localhost, your DATABASES setting in your Django settings.py file looks like
@@ -57,7 +59,7 @@ Getting Started and Setting it all up.
               'NAME': 'poll',
               'USER': 'poll',
               'PASSWORD': 'poll314',
-              'HOST': '127.0.0.1',
+              'HOST': '192.168.33.10',
               'PORT': '3306',
           }
       }
