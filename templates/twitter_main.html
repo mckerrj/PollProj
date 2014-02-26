@@ -39,7 +39,7 @@
         </div>
         <script type="text/javascript">
             function TweetsViewModel() {
-                self.tasksURI = 'http://localhost:8000/api/v1/tweet/';
+                self.tasksURI = '/api/v1/tweet/';
                 self.tweets = ko.observableArray();
 
                 self.ajax = function(uri, method, data) {
