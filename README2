@@ -17,7 +17,7 @@ in a VERY simple app.
   - A Simple Nginx config
   - Setup a Virtual Environment
   - Get the code and MOST dependencies from GitHub
-8) Run some final config steps to get data and run your app.
+8) deploy your app using Jenkins
 
 Assumptions:
 - You can use some unix-like environment.  I've only tested this on OSX and a Vagrant Precise64 environment.

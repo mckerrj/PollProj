@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'tastypie',
     'provider',
     'provider.oauth2',
-    #'tastypie_two_legged_oauth',
     'djcelery'
 )
 
