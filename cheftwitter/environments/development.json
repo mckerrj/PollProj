@@ -1,0 +1,24 @@
+{
+  "chef_type": "environment",
+  "cookbook_versions": {},
+  "default_attributes": {
+	"mysql": {
+        "bind_address": "192.168.33.10",
+	"allow_remote_root": "true",
+	"remove_test_database": "true",
+	"remove_anonymous_users": "true"
+    	},
+	"redisio": {
+                "default_settings": {
+			 "address":"192.168.33.10"
+		}
+         }
+  },
+  "description": "Jason's Testing Environment",
+  "json_class": "Chef::Environment",
+  "name": "development",
+  "override_attributes": {
+  	"mysql": {
+		"server_root_password": "root314"
+  	}
+}
