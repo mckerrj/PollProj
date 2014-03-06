@@ -1,6 +1,6 @@
 from tastypie.test import ResourceTestCase
 from django.core.urlresolvers import reverse
-from tastypie_two_legged_oauth.models import OAuthConsumer
+#from tastypie_two_legged_oauth.models import OAuthConsumer
 from happyhour.api.clients import oauth2_wrap
 
 
@@ -14,7 +14,7 @@ class TestsEntryResource(ResourceTestCase):
         super(TestsEntryResource, self).setUp()
 
         # Create oauth stuff
-        self.consumer = OAuthConsumer.objects.create(name='Test', key='foo', secret='bar')
+        #self.consumer = OAuthConsumer.objects.create(name='Test', key='foo', secret='bar')
 
     # Showing how to do the basic get from the resource, and test to make sure it is secured.
     # def test_get_tweet_unauthorized(self):

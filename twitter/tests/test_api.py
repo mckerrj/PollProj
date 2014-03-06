@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from tastypie.test import ResourceTestCase
 from twitter.models import Entry
-from tastypie_two_legged_oauth.models import OAuthConsumer
+#from tastypie_two_legged_oauth.models import OAuthConsumer
 from django.core.urlresolvers import reverse
 from happyhour.api.clients import oauth2_wrap
 import urllib
@@ -19,7 +19,7 @@ class TestsEntryResource(ResourceTestCase):
         # Create a user.
         self.username = 'admin'
         self.user = User.objects.get(username=self.username)
-        self.consumer = OAuthConsumer.objects.create(name='Test', key='foo', secret='bar')
+        #self.consumer = OAuthConsumer.objects.create(name='Test', key='foo', secret='bar')
 
         # Fetch the ``Entry`` object we'll use in testing.
         # Note that we aren't using PKs because they can change depending
@@ -35,12 +35,12 @@ class TestsEntryResource(ResourceTestCase):
             'pub_date': '2011-05-01T22:05:12'
         }
 
-    def test_get_list_unauthorized(self):
-        self.assertHttpUnauthorized(self.api_client.get('/api/v1/entry/', format='json'))
+    # def test_get_list_unauthorized(self):
+    #     self.assertHttpUnauthorized(self.api_client.get('/api/v1/entry/', format='json'))
 
     # Done a different way just for giggles.  More abstract, more complex than above.
-    def test_get_list__entry_unauthorized(self):
-        self.assertHttpUnauthorized(self.api_client.get(reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})))
+    # def test_get_list__entry_unauthorized(self):
+    #     self.assertHttpUnauthorized(self.api_client.get(reverse('api_dispatch_list', kwargs={'resource_name': 'entry', 'api_name': 'v1'})))
 
     def test_working_case_user_list(self):
         get_user_url = reverse('api_dispatch_list', kwargs={'resource_name': 'user', 'api_name': 'v1'})
