@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDo API Client Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">Twitter API Client Demo</a>
+    </div>
+</div>
+<div id="main" class="container">
+    <table class="table table-striped">
+        <tr>
+            <td style="width: 1px;"></td>
+            <td><b>Twitter User</b></td>
+            <td><b>Name</b></td>
+            <td><b>User ID#</b></td>
+            <td><b>Profile Image</b></td>
+        </tr>
+        <tbody data-bind="twitterUser">
+        <tr>
+            <td><span data-bind="visible: twitterUser.screenName()" class="label label-success">Yup</span></td>
+            <td><p><b data-bind="text: twitterUser.screenName()"></b></p></td>
+            <td><p><b data-bind="text: twitterUser.realName()"></b></p></td>
+            <td><p><b data-bind="text: twitterUser.id()"></b></p></td>
+            <td><p><img data-bind="attr:{src: twitterUser.profileImage()}"></p></td>
+        </tr>
+        </tbody>
+    </table>
+    <button onClick="location='../'" class="btn">Return to Tweets</button>
+</div>
+<script type="text/javascript">
+    function urlParam(name) {
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results == null) {
+            return null;
+        }
+        else {
+            return results[1] || 0;
+        }
+    }
+    function TweetsViewModel() {
+        self.tasksURI = '/api/v1/twitteruser/' + urlParam('screen_name');
+        self.twitterUser = {
+            realName: ko.observable(),
+            screenName: ko.observable(),
+            id: ko.observable(),
+            profileImage: ko.observable()
+        }
+
+        self.ajax = function (uri, method, data) {
+            var request = {
+                url: uri,
+                type: method,
+                contentType: "application/json",
+                Accept: "application/json",
+                cache: false,
+                dataType: 'json',
+                data: JSON.stringify(data)
+            };
+            return $.ajax(request);
+        }
+        LoadData();
+    }
+    function LoadData() {
+        self.ajax(self.tasksURI, 'GET').done(function (data) {
+            //Simple, not very thorough check to make sure only one object returned (since TastyPie would return 'objects' as an array.
+            if (typeof(data.objects) == "undefined") {
+                self.twitterUser.realName(data.name);
+                self.twitterUser.screenName(data.screen_name);
+                self.twitterUser.id(data.id);
+                self.twitterUser.profileImage(data.profile_image_url);
+            }
+            else {
+                alert("No data returned or more than one user returned.");
+            }
+        });
+    }
+    ko.applyBindings(new TweetsViewModel());
+</script>
+</body>
+</html>
