@@ -1,9 +1,9 @@
-from tastypie.authorization import Authorization
+#from tastypie.authorization import Authorization
 from django.contrib.auth.models import User
 from tastypie import fields
 from twitter.models import Entry, Poll, Choice, Tweet, TwitterUser
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from happyhour.api.authentication import MultiAuthentication, BouncerCookieAuthentication, MultipleValueTwoLeggedOAuthAuthentication
+#from happyhour.api.authentication import MultiAuthentication, BouncerCookieAuthentication, MultipleValueTwoLeggedOAuthAuthentication
 from django.conf.urls import url
 
 
@@ -36,8 +36,8 @@ class EntryResource(ModelResource):
             'pub_date': ['exact', 'lt', 'lte', 'gte', 'gt'],
             'slug': ALL,
         }
-        authorization = Authorization()
-        authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
+        #authorization = Authorization()
+        #authentication = MultiAuthentication(MultipleValueTwoLeggedOAuthAuthentication(), BouncerCookieAuthentication())
 
 
 # Basic Poll, nothing to see here.
