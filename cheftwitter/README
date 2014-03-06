@@ -1,0 +1,29 @@
+Chef config for TwitterApp
+-test
+1) get starter-kit from Chef Enterprise
+2) git init .
+3) git add .
+4) git commit -m "initia"
+5) knife cookbook site install apt
+6) knife cookbook site install mysql
+7) knife cookbook create twitterapp
+8) Go to cookbooks/twitterapp and edit metadata.rb to add
+  depends "apt"
+  depends "mysql"
+9) Go to cookbooks/twitterapp/recipes and edit default.rb to add
+  include_recipe "apt"
+  include_recipe "mysql::client"
+  include_recipe "mysql::server"
+10) EITHER 
+- knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant --ssh-port 2222 --run-list "recipe[twitterapp]" --sudo
+OR
+- Edit the VagrantFile you're using and add 
+   config.vm.provision :chef_client do |chef|
+     chef.chef_server_url = "https://api.opscode.com/organizations/wickedhobo"
+     chef.validation_client_name = "wickedhobo-validator"
+     chef.validation_key_path = "/Users/mckerrj/chef-repo/.chef/wickedhobo-validator.pem"
+
+     chef.add_recipe "twitterapp"
+   end
+
+

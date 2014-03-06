@@ -1,0 +1,6 @@
+Host deploy_key github.com
+Hostname github.com
+IdentityFile /root/.ssh/id_rsa_twitterapp
+#User username-on-remote-machine
+StrictHostKeyChecking no
+UserKnownHostsFile /dev/null
