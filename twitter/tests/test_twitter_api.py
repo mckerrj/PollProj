@@ -30,14 +30,14 @@ class TestsEntryResource(ResourceTestCase):
 
     def test_get_tweet_list(self):
         get_entry_url = reverse('api_dispatch_list', kwargs={'resource_name': 'tweet', 'api_name': 'v1'})
-        wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar')
-        response = self.api_client.get(wrapped_url, format='json')
+        #wrapped_url = oauth2_wrap(get_entry_url, 'foo', 'bar')
+        response = self.api_client.get(get_entry_url, format='json')
         self.assertValidJSONResponse(response)
         self.assertEqual(len(self.deserialize(response)['objects']), 5)
 
     def test_get_twitteruser_detail(self):
-        wrapped_url = oauth2_wrap('/api/v1/twitteruser/newtMcKerr/', 'foo', 'bar')
-        response = self.api_client.get(wrapped_url, format='json')
+        #wrapped_url = oauth2_wrap('/api/v1/twitteruser/newtMcKerr/', 'foo', 'bar')
+        response = self.api_client.get('/api/v1/twitteruser/newtMcKerr/', format='json')
         self.assertValidJSONResponse(response)
         self.assertEqual(self.deserialize(response)['screen_name'], 'newtMckerr')
         self.assertKeys(self.deserialize(response), ['id', 'lang', 'screen_name', 'resource_uri', 'friends_count', 'profile_image_url_https',
