@@ -1,7 +1,7 @@
 from tastypie.test import ResourceTestCase
 from django.core.urlresolvers import reverse
 #from tastypie_two_legged_oauth.models import OAuthConsumer
-from happyhour.api.clients import oauth2_wrap
+#from happyhour.api.clients import oauth2_wrap
 
 
 # Since this app pulls its data through twitter_sync using celery, I'm only doing gets for testing these
