@@ -24,7 +24,7 @@ class UserResource(ModelResource):
 
 
 # Entry shows basic relationship and some more filtering options.
-# Relationship shouws path to related object.
+# Relationship shows path to related object.
 class EntryResource(ModelResource):
     user = fields.ToOneField(UserResource, 'user')
 
