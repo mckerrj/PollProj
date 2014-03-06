@@ -27,7 +27,7 @@
                 <tbody data-bind="foreach: tweets">
                     <tr>
                         <td><span data-bind="visible: created_at" class="label label-success">Yup</span></td>
-                        <td><p><b data-bind="text: screen_name"></b></p></td>
+                        <td><p><a data-bind="text: screen_name, attr: {href: userDetailURL}"></a></p></td>
                         <td><p><b data-bind="text: name"></b></p></td>
                         <td><p><b data-bind="text: id"></b></p></td>
                         <td><p data-bind="text: text"></p></td>
@@ -35,7 +35,6 @@
                     </tr>
                 </tbody>
             </table>
-{#            <button data-bind="click: seeUser" class="btn">See User</button>#}
         </div>
         <script type="text/javascript">
             function TweetsViewModel() {
@@ -66,6 +65,7 @@
                         tweet.id = ko.observable(data.objects[i].id);
                         tweet.screen_name = ko.observable(data.objects[i].twitteruser.screen_name);
                         tweet.name = ko.observable(data.objects[i].twitteruser.name);
+                        tweet.userDetailURL = ko.observable("twuser/?screen_name=" + data.objects[i].twitteruser.screen_name);
                         self.tweets.push(tweet);
                     }
                 });
