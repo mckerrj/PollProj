@@ -34,24 +34,24 @@ and stores them.
   Print just prints to the console so you can see when the task has happened and see the actual data
   events when you're running celery from the command line.
 
-  ### Where to manage the tasks:
-  You manage the tasks in the Django settings file settings.py.
-  <code>
-    CELERYBEAT_SCHEDULE = {
-        'add-every-30-seconds': {
-            'task': 'twitter.tasks.add',
-            'schedule': timedelta(seconds=30),
-            'args': (16, 16)
-        },
-        'hello-every-10-seconds': {
-            'task': 'twitter.tasks.hello',
-            'schedule': timedelta(seconds=10)
-        },
-        'run-twitter-sync-every-5-minutes': {
-            'task': 'twitter.tasks.run_twitter_sync',
-            'schedule': crontab(minute='*/5')
-        },
-    }
-  </code>
+### Where to manage the tasks:
+You manage the tasks in the Django settings file settings.py.
+```
+  CELERYBEAT_SCHEDULE = {
+      'add-every-30-seconds': {
+          'task': 'twitter.tasks.add',
+          'schedule': timedelta(seconds=30),
+          'args': (16, 16)
+      },
+      'hello-every-10-seconds': {
+          'task': 'twitter.tasks.hello',
+          'schedule': timedelta(seconds=10)
+      },
+      'run-twitter-sync-every-5-minutes': {
+          'task': 'twitter.tasks.run_twitter_sync',
+          'schedule': crontab(minute='*/5')
+      },
+  }
+```
 
-  You can see that you can use Celery's syntax or crontab style syntax.
+You can see that you can use Celery's syntax or crontab style syntax.
