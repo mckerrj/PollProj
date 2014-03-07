@@ -37,7 +37,6 @@ and stores them.
   ### Where to manage the tasks:
   You manage the tasks in the Django settings file settings.py.
   <code>
-  # Showing timedelta and crontab style
     CELERYBEAT_SCHEDULE = {
         'add-every-30-seconds': {
             'task': 'twitter.tasks.add',
