@@ -6,6 +6,37 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from django.conf.urls import url
 
 
+# - resource_name will be mapped to the url, so you'll be hitting
+#   /api/v1/twitteruser
+#   Adding this note to show that it's NOT the same as field mapping (seen below in TweerResource in the FK reference
+# - Since data should get pulled from twitter, only method allowed is ['get']
+# - The prepend_urls function shows how to modify the URL.  So to get a specific TwitterUserResource
+#   you can now call api/v1/twitteruser/<screen_name>/
+class TwitterUserResource(ModelResource):
+    class Meta:
+        queryset = TwitterUser.objects.all()
+        resource_name = 'twitteruser'
+        allowed_methods = ['get']
+        detail_uri_name = 'screen_name'
+
+        def prepend_urls(self):
+            return [
+                url(r"^(?P<resource_name>%s)/(?P<screen_name>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
+            ]
+
+
+class TweetResource(ModelResource):
+    twitteruser = fields.ToOneField(TwitterUserResource, 'twitter_user', full=True)
+
+    class Meta:
+        queryset = Tweet.objects.all()
+        resource_name = 'tweet'
+        allowed_methods = ['get']
+        filtering = {
+            'twitter_user': ALL_WITH_RELATIONS,
+        }
+
+
 # Pretty standard resource.  Kept to show that you can white list fields, or exclude them
 # or whitelist them.  Also easy to restrict callable methods for the REST api.
 class UserResource(ModelResource):
@@ -62,35 +93,4 @@ class ChoiceResource(ModelResource):
         filtering = {
             'poll': ALL_WITH_RELATIONS,
             'choice_text': ALL,
-        }
-
-
-# - resource_name will be mapped to the url, so you'll be hitting
-#   /api/v1/twitteruser
-#   Adding this note to show that it's NOT the same as field mapping (seen below in TweerResource in the FK reference
-# - Since data should get pulled from twitter, only method allowed is ['get']
-# - The prepend_urls function shows how to modify the URL.  So to get a specific TwitterUserResource
-#   you can now call api/v1/twitteruser/<screen_name>/
-class TwitterUserResource(ModelResource):
-    class Meta:
-        queryset = TwitterUser.objects.all()
-        resource_name = 'twitteruser'
-        allowed_methods = ['get']
-        detail_uri_name = 'screen_name'
-
-        def prepend_urls(self):
-            return [
-                url(r"^(?P<resource_name>%s)/(?P<screen_name>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
-            ]
-
-
-class TweetResource(ModelResource):
-    twitteruser = fields.ToOneField(TwitterUserResource, 'twitter_user', full=True)
-
-    class Meta:
-        queryset = Tweet.objects.all()
-        resource_name = 'tweet'
-        allowed_methods = ['get']
-        filtering = {
-            'twitter_user': ALL_WITH_RELATIONS,
         }
