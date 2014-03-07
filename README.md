@@ -28,11 +28,11 @@ Assumptions:
 So let's do all that.  We're going to go out of order from above and get it up and running, then walk through all of the app bits.
 
 
-1) Get the code and stuff.
+- Get the code and stuff.
   - Create a directory where you want your stuff.
     - run <code>git clone ???repository????'</code>
   - Now you've got some code! Yay.  Unfortunately, you're not quite done.
-2) Now 'cd' into the TwitterApp directory.
+- Now 'cd' into the TwitterApp directory.
   - Sidenote: I've got the Chef repository and the App Repository all together.  This isn't the cleanest way to go, but for a training app, it's ok.
   - You can now see various bits of the app that I've all put in the root directory more for simplicity than for cleanliness. Things to note
     - README
