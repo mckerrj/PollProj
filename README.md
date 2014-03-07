@@ -24,7 +24,8 @@ in a VERY simple app.  It's knockout.js and ajax.  Very simple.
 - You know a little bit about software development.  Databases. Stuff like that.
 - You can do some basic stuff with virtual machines.
 
-So let's do all that.  We're going to go out of order from above and get it up and running, then walk through all of the app bits.
+###So let's do all that.  
+We're going to go out of order from above and get it up and running, then walk through all of the app bits.
 
 
 - Get the code and stuff.
