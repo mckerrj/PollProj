@@ -62,7 +62,7 @@ So let's do all that.  We're going to go out of order from above and get it up a
       go to a simple detail page for the user.
     - You can also play with most of the API's through an API tool or the URL
       - http://192.168.33.10/api/v1/tweet/
-      - http://192.168.33.10/api/v1/poll/238746430288838656
+      - http://192.168.33.10/api/v1/tweet/238746430288838656
       - http://192.168.33.10/api/v1/tweet/schema
       - http://192.168.33.10/api/v1/twitteruser/
       - http://192.168.33.10/api/v1/twitteruser/newtMcKerr
