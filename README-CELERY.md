@@ -21,13 +21,13 @@ and stores them.
 
 - The [tasks.py] file is the list of programmatic tasks have Celery manage. There are some other samples
   in the file, but the important one is:
-  <code>
+  ```
   @app.task
   def run_twitter_sync():
       data = twitter_sync.call_for_timeline_data_json()
       twitter_sync.sync_tweets_and_users_save(data)
       print(Tweet.objects.all())
-  </code>
+  ```
 
   The decorator <code>@app.task</code> registers the task with celery, so it knows what to do. the rest
   is just running the sync.  I should probably collaps the method call, but this is easier to read.
