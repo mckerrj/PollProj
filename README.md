@@ -69,8 +69,9 @@ So let's do all that.  We're going to go out of order from above and get it up a
       - http://192.168.33.10/api/v1/twitteruser/schema
     - I've also enabled the admin app so you can play around with data.  Hit http://192.168.33.10/admin.  Username is 'admin' password is 'admin314'
 
-  ### Now onto the project itself.  I'll create a different README for each major chunk of the project.
-  - /README-DJANGO.md
+  ### Now onto the project itself.
+  I'll create a different README for each major chunk of the project.
+  - [README-DJANGO](README-DJANGO.md)
   - /README-TASTYPIE.md
   - /README-CELERY.md
   - /README-TESTS.md
