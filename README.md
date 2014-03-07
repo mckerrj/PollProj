@@ -1,6 +1,6 @@
 ## Simple Tutorial App for Django, basic Python, Celery, Tastypie, and Chef.
 
-# What the TwitterApp does
+### What the TwitterApp does
 - Setup a simple Django project
 - Shows how to set up a simple Django Model
 - Setup a simple Tastypie API
@@ -18,7 +18,7 @@ in a VERY simple app.  It's knockout.js and ajax.  Very simple.
   - Setup a Python Virtual Environment
   - Get the code and MOST dependencies from GitHub
 
-# Assumptions:
+### Assumptions:
 - You can use some unix-like environment.  I've only tested this on OSX and a Vagrant Precise64 environment.
 - You can do some basic stuff with Git.
 - You know a little bit about software development.  Databases. Stuff like that.
@@ -69,7 +69,7 @@ So let's do all that.  We're going to go out of order from above and get it up a
       - http://192.168.33.10/api/v1/twitteruser/schema
     - I've also enabled the admin app so you can play around with data.  Hit http://192.168.33.10/admin.  Username is 'admin' password is 'admin314'
 
-  # Now onto the project itself.  I'll create a different README for each major chunk of the project.
+  ### Now onto the project itself.  I'll create a different README for each major chunk of the project.
   - /README-DJANGO.md
   - /README-TASTYPIE.md
   - /README-CELERY.md
