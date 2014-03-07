@@ -1,6 +1,6 @@
-Tastypie!
+## Tastypie!
 
-The Tastypie stuff is mostly in the file 'api.py'.  I'll go through some more detail here:
+### The Tastypie stuff is mostly in the file 'api.py'.  I'll go through some more detail here:
 
 - The primary resources are TwitterUserResource and Tweet Resource. The others are just leftover from Django and Tastypie.
   - Both methods only allow for 'get' operations since the actual data is pulled from twitter.
