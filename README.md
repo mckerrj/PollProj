@@ -16,7 +16,7 @@ in a VERY simple app.  It's knockout.js and ajax.  Very simple.
   - Django and uwsgi
   - A Simple Nginx config for passing through requests, reverse proxy, and mapping requests to static files.
   - Setup a Python Virtual Environment
-  - Get the code and MOST dependencies from GitHub
+  - Get the code and dependencies from GitHub
 
 ### Assumptions:
 - You can use some unix-like environment.  I've only tested this on OSX and a Vagrant Precise64 environment.
