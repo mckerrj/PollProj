@@ -1,25 +1,24 @@
-Tastypie Tutorial App for Django, basic Python, Celery, Tastypie, and Chef.
+## Simple Tutorial App for Django, basic Python, Celery, Tastypie, and Chef.
 
-What the TwitterApp does
+# What the TwitterApp does
 - Setup a simple Django project
 - Shows how to set up a simple Django Model
 - Setup a simple Tastypie API
 - Run tests against your model and your API.  Simple tests and some mock tests
-- Have a python object that Authenticates with Twitter and gets data about your Tweets and Twitter Handle associated with those Tweets. and stores them
-   using your DJango model.
+- Have a python object that Authenticates with Twitter and gets data about your Tweets and Twitter Handle associated with those Tweets. It then stores them
+   using your Django model.
 - Have a simple Celery app that runs the python-twitter sync-up every five minutes (if you let it).
 - Have a simple web app that uses HTML and Javascript (no Django views) to call the Tastypie API's to get your Tweet and Twitter user data and display them
-in a VERY simple app.
+in a VERY simple app.  It's knockout.js and ajax.  Very simple.
 - Deploy the entire app and stack using Chef and Vagrant which includes:
   - Redis to handle messaging for Celery
   - Mysql install, setup databases and users
   - Django and uwsgi
-  - A Simple Nginx config
-  - Setup a Virtual Environment
+  - A Simple Nginx config for passing through requests, reverse proxy, and mapping requests to static files.
+  - Setup a Python Virtual Environment
   - Get the code and MOST dependencies from GitHub
-- deploy your app using Jenkins
 
-Assumptions:
+# Assumptions:
 - You can use some unix-like environment.  I've only tested this on OSX and a Vagrant Precise64 environment.
 - You can do some basic stuff with Git.
 - You know a little bit about software development.  Databases. Stuff like that.
@@ -50,6 +49,7 @@ So let's do all that.  We're going to go out of order from above and get it up a
        - Switch directories into the twitter directory
        - run <code>python manage.py syncdb</code>  When the terminal asks you if you want to create a superuser, say, 'no'
        - run <code>python manage.py loaddata twitter/tests/fixtures/data.json</code>  Here we're just loading some data for giggles so you can play around with the API's
+       - run <code>sudo python manage.py collectstatic</code> (need sudo, because of where I'm putting the static files).
        - Now we want to runs some tests, make sure everything works, so run <code>python manage.py test</code> It may ask you if you want to delete the test_twitter db,
          say, 'yes'.  Should be ok now.
     - Now you need to run the process that goes to Twitter and sucks up Jason's info.  Yes, this currently has my Twitter Auth info in the app.  Don't abuse it.
@@ -67,8 +67,9 @@ So let's do all that.  We're going to go out of order from above and get it up a
       - http://192.168.33.10/api/v1/twitteruser/
       - http://192.168.33.10/api/v1/twitteruser/newtMcKerr
       - http://192.168.33.10/api/v1/twitteruser/schema
+    - I've also enabled the admin app so you can play around with data.  Hit http://192.168.33.10/admin.  Username is 'admin' password is 'admin314'
 
-  Now onto the project itself.  I'll create a different README for each major chunk of the project.
+  # Now onto the project itself.  I'll create a different README for each major chunk of the project.
   - /README-DJANGO.md
   - /README-TASTYPIE.md
   - /README-CELERY.md
