@@ -34,7 +34,7 @@ So let's do all that.  We're going to go out of order from above and get it up a
   - Now you've got some code! Yay.  Unfortunately, you're not quite done.
 2) Now 'cd' into the TwitterApp directory.
   - Sidenote: I've got the Chef repository and the App Repository all together.  This isn't the cleanest way to go, but for a training app, it's ok.
-  a) You can now see various bits of the app that I've all put in the root directory more for simplicity than for cleanliness. Things to note:
+  a) You can now see various bits of the app that I've all put in the root directory more for simplicity than for cleanliness. Things to note
     - README!
     - The 'cheftwitter' directory.  This contains all of the chef recipes, roles, environments, cookbooks that you'll need.  It also contains the Vagrantfile.
        I'm not going to go into Chef in detail until later, but the Vagrantfile should be all you need to get the whole kit running.
