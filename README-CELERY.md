@@ -5,7 +5,7 @@ screen name's Twitter account.  It then serializes the returned JSON objects to 
 and stores them.
 
 ###Sync the data
-- The linked [file](https://github.com/mckerrj/TwitterApp/blob/master/twitter/twitter_sync.py) is the python
+- The linked [twitter_sunc.py](https://github.com/mckerrj/TwitterApp/blob/master/twitter/twitter_sync.py) is the python
   file that syncs the data.  It does the following:
   - Manage the OAuth request.
   - call the timeline URI/REST-API.  Ensre that the response is JSON data.
@@ -19,7 +19,7 @@ and stores them.
 - The [celeryapp.py](https://github.com/mckerrj/TwitterApp/blob/master/twitterapp/celeryapp.py) file
   basically gives celery the key settings it needs.
 
-- The [tasks.py] file is the list of programmatic tasks have Celery manage. There are some other samples
+- The [tasks.py](https://github.com/mckerrj/TwitterApp/blob/master/twitter/tasks.py) file is the list of programmatic tasks have Celery manage. There are some other samples
   in the file, but the important one is:
   ```
   @app.task
