@@ -94,8 +94,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ('/static/',)
-
+#STATICFILES_DIRS = ('/static/',)
+STATIC_ROOT = '/static/'
 API_LIMIT_PER_PAGE = 20
 
 TASTYPIE_DEFAULT_FORMATS = ['json']
