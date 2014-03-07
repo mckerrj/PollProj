@@ -5,7 +5,7 @@ screen name's Twitter account.  It then serializes the returned JSON objects to 
 and stores them.
 
 ###Sync the data
-- The linked [twitter_sunc.py](https://github.com/mckerrj/TwitterApp/blob/master/twitter/twitter_sync.py) is the python
+- The linked [twitter_sync.py](https://github.com/mckerrj/TwitterApp/blob/master/twitter/twitter_sync.py) is the python
   file that syncs the data.  It does the following:
   - Manage the OAuth request.
   - call the timeline URI/REST-API.  Ensre that the response is JSON data.
