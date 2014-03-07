@@ -29,7 +29,7 @@ and stores them.
       print(Tweet.objects.all())
   ```
 
-  The decorator <code>@app.task</code> registers the task with celery, so it knows what to do. the rest
+  The decorator <code>@app.task</code> registers the task with celery, so it knows what to do. The rest
   is just running the sync.  I should probably collaps the method call, but this is easier to read.
   Print just prints to the console so you can see when the task has happened and see the actual data
   events when you're running celery from the command line.
