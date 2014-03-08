@@ -110,7 +110,7 @@
   - The [virtualenv.rb](https://github.com/mckerrj/TwitterApp/blob/master/cheftwitter/cookbooks/twitterapp/recipes/virtualenv.rb) file just creates
     a python virtual environment.
   - The [python-requirements.rb](https://github.com/mckerrj/TwitterApp/blob/master/cheftwitter/cookbooks/twitterapp/recipes/python-requirements.rb)
-    installs the necessary ptyhon stuff for the project.
+    installs the necessary python stuff for the project.
 
 - That should really cover all of the chef config for this project.
 
