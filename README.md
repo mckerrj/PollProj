@@ -75,7 +75,7 @@ We're going to go out of order from above and get it up and running, then walk t
   - [README-DJANGO](README-DJANGO.md)
   - [README-TASTYPIE](README-TASTYPIE.md)
   - [README-CELERY](README-CELERY.md)
-  - /README-TESTS.md
+  - [README-TESTS](README-TESTS.md)
   - /README-CHEF.md
   - /READMY-WEBSETUP.md
 
