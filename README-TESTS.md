@@ -1,6 +1,6 @@
 ## Tests!
 
-# I've written a series of tests just  to show some different, simple test conventions
+### I've written a series of tests just  to show some different, simple test conventions
 
 - The Tests in [test_api.py](https://github.com/mckerrj/TwitterApp/blob/master/twitter/tests/test_api.py) are for testing the Entry and User resources.
   - I'm loading fixture data for testing in this case.  You can see the load at the top in this line <code>fixtures = ['data.json']</code>
