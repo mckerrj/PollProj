@@ -1,4 +1,6 @@
 ## Simple Tutorial App for Django, basic Python, Celery, Tastypie, and Chef.
+This app is for onboarding new employees at SocialCode to familiarize yourself with some basics around our technical stack notably Django, Python, TastyPie,
+Celery, UWSGI, Nginx, and Chef/Vagrant.
 
 ### What the TwitterApp does
 - Setup a simple Django project
@@ -78,7 +80,7 @@ We're going to go out of order from above and get it up and running, then walk t
   - [README-TESTS](README-TESTS.md)
   - [README-CHEF](README-CHEF.md)
   - [README-WEBSETUP](README-WEBSETUP.md)
-  - /README-FRONTEND.md
+  - [README-FRONTEND](README-FRONTEND.md)
 
 
 
