@@ -62,7 +62,7 @@
 
 - The [staging environment](https://github.com/mckerrj/TwitterApp/blob/master/cheftwitter/environments/staging.json) would normally be all of the
   standard settings that I want, but chef-solo does some weird stuff with the MySQL cookbook.  Sor for Solo it'll use the <code>chef.json</code>
-  stuff in the VagrantFile and for Enterprise it'll use the settings in this file:
+  stuff in the VagrantFile and for Enterprise it'll use the settings in the environment file:
   ```
     {
       "chef_type": "environment",
