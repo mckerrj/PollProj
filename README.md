@@ -76,7 +76,7 @@ We're going to go out of order from above and get it up and running, then walk t
   - [README-TASTYPIE](README-TASTYPIE.md)
   - [README-CELERY](README-CELERY.md)
   - [README-TESTS](README-TESTS.md)
-  - /README-CHEF.md
+  - [README-CHEF.md](README-CHEF.md)
   - /READMY-WEBSETUP.md
   - /README-FRONTEND.md
 
