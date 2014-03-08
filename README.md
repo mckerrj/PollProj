@@ -4,7 +4,7 @@
 - Setup a simple Django project
 - Shows how to set up a simple Django Model
 - Setup a simple Tastypie API
-- Run tests against your model and your API.  Simple tests and some mock tests
+- Run tests against your model and your API.  Simple tests, mock tests, and API tests.
 - Have a python object that Authenticates with Twitter and gets data about your Tweets and Twitter Handle associated with those Tweets. It then stores them
    using your Django model.
 - Have a simple Celery app that runs the python-twitter sync-up every five minutes (if you let it).
