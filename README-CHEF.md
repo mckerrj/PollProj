@@ -4,7 +4,7 @@
   I assume your using Chef-solo and not an enterprise account, so that's the default setup.
 - All of the Chef and Vagrant configs are here: [Chef Directory](https://github.com/mckerrj/TwitterApp/tree/master/cheftwitter)
 - Since we're using chef-solo with Vagrant, the [VagrantFile](https://github.com/mckerrj/TwitterApp/blob/master/cheftwitter/Vagrantfile) the
-  various chef-artifacts are setup in the VagrantFile.
+  various chef artifacts are setup in the VagrantFile.
   ```
     config.omnibus.chef_version = :latest
 
