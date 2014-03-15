@@ -19,6 +19,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '@w_ia9+*-o@pdgueo*n2ts4hr%3_&=l)!0ag5bg3%ght7=g&k-'
 
+# Security stuff for Twitter API, and screen name.
+OAUTH_TOKEN = '260431924-oAqZnVPosiGssJMLWTFlpdE1x9Xnc379RmyafpX7'
+OAUTH_TOKEN_SECRET = 'wKOyRxjjDiJZMOBJwzcZcc0FZvaEYwjqCBZGHaP1SSlJA'
+CONSUMER_KEY = 'qLh1cmWyqZpMWhfWKIHew'
+CONSUMER_SECRET = 'JqLTPD1UN5d5Yzev82tBLSexIdMHmRMdlu1Ml9vig'
+TWITTER_SCREENNAME = 'newtMckerr'
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -129,6 +137,6 @@ CELERYBEAT_SCHEDULE = {
     },
     'run-twitter-sync-every-5-minutes': {
         'task': 'twitter.tasks.run_twitter_sync',
-        'schedule': crontab(minute='*/5')
+        'schedule': crontab(minute='*/1')
     },
 }
