@@ -3,31 +3,25 @@ import requests
 from twitter.models import Tweet, TwitterUser
 import datetime
 import pytz
+from django.conf import settings
+import requests.exceptions
 
-OAUTH_TOKEN = '260431924-oAqZnVPosiGssJMLWTFlpdE1x9Xnc379RmyafpX7'
-OAUTH_TOKEN_SECRET = 'wKOyRxjjDiJZMOBJwzcZcc0FZvaEYwjqCBZGHaP1SSlJA'
-CONSUMER_KEY = 'qLh1cmWyqZpMWhfWKIHew'
-CONSUMER_SECRET = 'JqLTPD1UN5d5Yzev82tBLSexIdMHmRMdlu1Ml9vig'
-API_URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=newtMcKerr'
+
+API_URL = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=%s' % (settings.TWITTER_SCREENNAME,)
 
 
 def get_oauth():
-    oauth = OAuth1(CONSUMER_KEY,
-                   client_secret=CONSUMER_SECRET,
-                   resource_owner_key=OAUTH_TOKEN,
-                   resource_owner_secret=OAUTH_TOKEN_SECRET)
+    oauth = OAuth1(settings.CONSUMER_KEY,
+                   client_secret=settings.CONSUMER_SECRET,
+                   resource_owner_key=settings.OAUTH_TOKEN,
+                   resource_owner_secret=settings.OAUTH_TOKEN_SECRET)
     return oauth
 
 
-# todo add exception handling?
 def call_for_timeline_data_json():
     oauth = get_oauth()
     response = requests.get(url=API_URL, auth=oauth)
-    # A bunch of random stuff to play with how response works and what data/formats can be retrieved.
-    #print(response.encoding)
-    #print(response.content)
-    #print(response.json())
-    #data = simplejson.loads(response.content)
+    response.raise_for_status()
     return response.json()
 
 
