@@ -32,7 +32,7 @@ We're going to go out of order from above and get it up and running, then walk t
 
 - Get the code and stuff.
   - Create a directory where you want your stuff.
-    - run <code>git clone ???repository????'</code>
+    - run <code>git clone git@github.com:mckerrj/TwitterApp.git</code>
   - Now you've got some code! Yay.  Unfortunately, you're not quite done.
 - Now 'cd' into the TwitterApp directory.
   - Sidenote: I've got the Chef repository and the App Repository all together.  This isn't the cleanest way to go, but for a training app, it's ok.
