@@ -47,6 +47,18 @@ We're going to go out of order from above and get it up and running, then walk t
     - I've found that sometimes this will provision the VM with chef-solo, and sometimes not.  If you don't see any chef stuff happening, run <code>vagrant provision</code>
        after <code>vagrant up</code> has completed.
     - ssh into the VM using <code>vagrant ssh</code>
+    - **Note** Right now this app uses a read-only set of authorization parameters for my own Twitter handle.  You can use it, as it's read only, but if
+      want your own stuff, please change the following parameters in the project's 'settings.py' file.
+      - OAUTH_TOKEN
+      - OAUTH_TOKEN_SECRET
+      - CONSUMER_KEY
+      - CONSUMER_SECRET
+      - TWITTER_SCREENNAME
+      - To Change them, you'll need a Twitter account then
+        - Then you'll need to login to Twitter's developer site at 'apps.twitter.com' and click the 'create new app' button
+        - Once you've created the app you need to create access tokens.  Click on the API keys tab and create them.
+        - Then copy the right keys into 'settings.py' file.
+
     - You'll need to run some stuff to finish it all.
        - Activate the virtual environment <code>source twitter_ve/bin/activate</code>
        - Switch directories into the twitter directory
