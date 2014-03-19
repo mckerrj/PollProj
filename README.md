@@ -47,7 +47,7 @@ We're going to go out of order from above and get it up and running, then walk t
     - I've found that sometimes this will provision the VM with chef-solo, and sometimes not.  If you don't see any chef stuff happening, run <code>vagrant provision</code>
        after <code>vagrant up</code> has completed.
     - ssh into the VM using <code>vagrant ssh</code>
-    - **Note** Right now this app uses a read-only set of authorization parameters for my own Twitter handle.  You can use it, as it's read only, but if
+    - **Note** You'll see OATH stuff in the 'settings.py' file but I've revoked access for those.  You'll need to add your own OAUTH stuff for Twitter.
       want your own stuff, please change the following parameters in the project's 'settings.py' file.
       - OAUTH_TOKEN
       - OAUTH_TOKEN_SECRET
