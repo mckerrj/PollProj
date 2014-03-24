@@ -67,21 +67,21 @@ We're going to go out of order from above and get it up and running, then walk t
        - run <code>sudo python manage.py collectstatic</code> (need sudo, because of where I'm putting the static files).
        - Now we want to runs some tests, make sure everything works, so run <code>python manage.py test</code> It may ask you if you want to delete the test_twitter db,
          say, 'yes'.  Should be ok now.
-    - Now you need to run the process that goes to Twitter and sucks up Jason's info.  Yes, this currently has my Twitter Auth info in the app.  Don't abuse it.
+    - Now you need to run the process that goes to Twitter and sucks up your twitter info. 
       Run the command: <code>sudo celery --app=twitterapp worker --loglevel=info -B</code> (make sure you're in the 'twitter' directory when you run this).
-      The task that gets the Twitter stuff runs once every 5 minutes.  Please don't leave this running.  Run it until you see it suck up the goods and then
+      The task that gets the Twitter stuff runs once every 5 minutes.  Probably don't want to leave it running.  Run it until you see it suck up the goods and then
       <code>ctrl-c</code> that process.  Celery will print out a bunch of stuff related to the task, so you'll see it happen.  If you're impatent, go to
       settings.py and shorten the time for the task.
     - Last step: Start django and uwsgi: <code>sudo uwsgi --socket /var/run/twitter.sock --module twitterapp.wsgi --chmod-socket=666</code>
        (make sure you're in the 'twitter' directory when you run this).
-    - Open a browser and hit http://192.168.33.10 and BAM.  You should see a list of my Tweets.  You can click on the Twitter User in any row to
+    - Open a browser and hit http://192.168.33.10 and BAM.  You should see a list of Tweets.  You can click on the Twitter User in any row to
       go to a simple detail page for the user.
     - You can also play with most of the API's through an API tool or the URL
       - http://192.168.33.10/api/v1/tweet/
-      - http://192.168.33.10/api/v1/tweet/238746430288838656
+      - http://192.168.33.10/api/v1/tweet/<tweetid>
       - http://192.168.33.10/api/v1/tweet/schema
       - http://192.168.33.10/api/v1/twitteruser/
-      - http://192.168.33.10/api/v1/twitteruser/newtMcKerr
+      - http://192.168.33.10/api/v1/twitteruser/<twitter-handle>
       - http://192.168.33.10/api/v1/twitteruser/schema
     - I've also enabled the admin app so you can play around with data.  Hit http://192.168.33.10/admin.  Username is 'admin' password is 'admin314'
 
