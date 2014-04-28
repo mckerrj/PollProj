@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '@w_ia9+*-o@pdgueo*n2ts4hr%3_&=l)!0ag5bg3%ght7=g&k-'
 
 # Security stuff for Twitter API, and screen name.
-OAUTH_TOKEN = '260431924-oAqZnVPosiGssJMLWTFlpdE1x9Xnc379RmyafpX7'
-OAUTH_TOKEN_SECRET = 'wKOyRxjjDiJZMOBJwzcZcc0FZvaEYwjqCBZGHaP1SSlJA'
-CONSUMER_KEY = 'qLh1cmWyqZpMWhfWKIHew'
-CONSUMER_SECRET = 'JqLTPD1UN5d5Yzev82tBLSexIdMHmRMdlu1Ml9vig'
-TWITTER_SCREENNAME = 'newtMckerr'
+OAUTH_TOKEN = '15764888-ukDfMEmRZlvuIkDwWo80tRCcCtmfED98iVkCdNOoL'
+OAUTH_TOKEN_SECRET = 'THyPnDcmTAt0K7clLAIbm0vVQRN1GbL3DcsvrDutEKdLt'
+CONSUMER_KEY = 'nEi0sMZ6kQniAJoBJv9GvSxgT'
+CONSUMER_SECRET = '0u1oZ0mxXMlrYSNTdyHH1U3WBFpKaFBLGOZLKPv2r4ULbAoxeM'
+TWITTER_SCREENNAME = 'kleids'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
