@@ -19,7 +19,6 @@ class TwitterUser(models.Model):
     profile_image_url = models.CharField(max_length=255)
     profile_image_url_https = models.CharField(max_length=255)
     lang = models.CharField(max_length=200)
-    
 
     def __unicode__(self):
         return u'ID: %s, screen_name: %s' % (self.id_str, self.screen_name)
@@ -35,7 +34,6 @@ class Tweet(models.Model):
     favorited = models.BooleanField()
     retweet_count = models.IntegerField()
     lang = models.TextField()
-    
 
     def __unicode__(self):
         return u'ID: %s, Text: %s' % (self.id_str, self.text)
@@ -74,6 +72,6 @@ class Entry(models.Model):
     def save(self, *args, **kwargs):
         # For automatic slug generation.
         if not self.slug:
-        	self.slug = slugify(unicode(self.title))[:50]
+            self.slug = slugify(unicode(self.title))[:50]
 
         return super(Entry, self).save(*args, **kwargs)
