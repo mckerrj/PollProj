@@ -91,8 +91,5 @@ def sync_tweets_and_users_save(data):
             t.lang=' '
         else:
              replytweet = get_reply_tweet(t.lang)
-             #print(t.text)
-             #print(replytweet['text'])
              t.lang=replytweet['text']
-             print(t.lang)
         t.save()

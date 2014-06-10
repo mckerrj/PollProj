@@ -49,7 +49,8 @@ INSTALLED_APPS = (
     'tastypie',
     'provider',
     'provider.oauth2',
-    'djcelery'
+    'djcelery',
+    'south'
 )
 
 TEMPLATE_DIRS = (

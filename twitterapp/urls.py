@@ -23,5 +23,6 @@ urlpatterns = patterns('',
     url(r'^api/', include(v1_api.urls)),
     url(r'^$', TemplateView.as_view(template_name='twitter_main.html'), name="twmain"),
     url(r'^twuser/$', TemplateView.as_view(template_name='twitter_user.html'), name="twuser"),
+    url(r'^twconv/$', TemplateView.as_view(template_name='twitter_conversation.html'), name="twconv"),
 
 )
