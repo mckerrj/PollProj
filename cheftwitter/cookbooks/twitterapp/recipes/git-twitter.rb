@@ -38,7 +38,7 @@ file "/root/.ssh/id_rsa_twitterapp" do
 end
 
 git "/home/vagrant/twitter/" do
-  repository "git@github.com:mckerrj/TwitterApp.git"
+  repository "https://github.com/kleids/TwitterApp.git"
   reference "master"
   action :checkout
 end

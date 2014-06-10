@@ -21,6 +21,7 @@
                     <td><b>Twitter User</b></td>
                     <td><b>Name</b></td>
                     <td><b>TweetID</b></td>
+                    <td><b>Mentions</b></td>
                     <td><b>Text</b></td>
                     <td><b>Date Created</b></td>
                 </tr>
@@ -30,6 +31,7 @@
                         <td><p><a data-bind="text: screen_name, attr: {href: userDetailURL}"></a></p></td>
                         <td><p><b data-bind="text: name"></b></p></td>
                         <td><p><b data-bind="text: id"></b></p></td>
+                        <td><p><b data-bind="text: mentions"></b></p></td>
                         <td><p data-bind="text: text"></p></td>
                         <td><p data-bind="text: created_at"></p></td>
                     </tr>
@@ -65,6 +67,7 @@
                         tweet.id = ko.observable(data.objects[i].id);
                         tweet.screen_name = ko.observable(data.objects[i].twitteruser.screen_name);
                         tweet.name = ko.observable(data.objects[i].twitteruser.name);
+                        tweet.mentions = ko.observable(data.objects[i].lang);
                         tweet.userDetailURL = ko.observable("twuser/?screen_name=" + data.objects[i].twitteruser.screen_name);
                         self.tweets.push(tweet);
                     }
