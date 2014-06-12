@@ -80,3 +80,8 @@ python_pip "uwsgi" do
   action :install
   virtualenv virtualenv_path
 end
+
+python_pip "south" do
+  action :install
+  virtualenv virtualenv_path
+end

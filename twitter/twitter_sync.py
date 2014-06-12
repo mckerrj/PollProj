@@ -25,6 +25,14 @@ def call_for_timeline_data_json():
     return response.json()
 
 
+def get_reply_tweet(tweetid):
+    oauth = get_oauth()
+    Tweet_URL = 'https://api.twitter.com/1.1/statuses/show.json?id=%s' % (tweetid)
+    response = requests.get(url=Tweet_URL, auth=oauth)
+    response.raise_for_status()
+    return response.json()
+
+
 # get_or_create seems obvious, but short circuits if exists.  Keeping this here because
 # it shows the get_or_create method with returns a tuple (not show) of the object and a boolean.
 # You'd use this if you DID NOT want to update changes to existing tweets or users.
@@ -37,10 +45,8 @@ def sync_tweets_and_users_getorcreate(data):
                      'friends_count': data[tweet]['user']['friends_count'],
                      'profile_image_url': data[tweet]['user']['profile_image_url'],
                      'profile_image_url_https': data[tweet]['user']['profile_image_url_https'],
-                     'lang': data[tweet]['user']['lang']
-                    }
+                     'lang': data[tweet]['user']['lang']}
         TwitterUser.objects.get_or_create(id=data[tweet]['user']['id'], defaults=tu_fields)
-
         t_fields = {'id_str': data[tweet]['id_str'],
                     'twitter_user_id': data[tweet]['user']['id'],
                     'text': data[tweet]['text'],
@@ -64,8 +70,7 @@ def sync_tweets_and_users_save(data):
                          friends_count=data[tweet]['user']['friends_count'],
                          profile_image_url=data[tweet]['user']['profile_image_url'],
                          profile_image_url_https=data[tweet]['user']['profile_image_url_https'],
-                         lang=data[tweet]['user']['lang']
-                         )
+                         lang=data[tweet]['user']['lang'])
         tu.save()
 
         t = Tweet(id=data[tweet]['id'],
@@ -75,6 +80,10 @@ def sync_tweets_and_users_save(data):
                   favorite_count=data[tweet]['favorite_count'],
                   favorited=data[tweet]['favorited'],
                   retweet_count=data[tweet]['retweet_count'],
-                  lang=data[tweet]['lang']
-                  )
+                  lang=data[tweet]['in_reply_to_status_id_str'])
+        if t.lang is None:
+            t.lang = ' '
+        else:
+            replytweet = get_reply_tweet(t.lang)
+            t.lang = replytweet['text']
         t.save()

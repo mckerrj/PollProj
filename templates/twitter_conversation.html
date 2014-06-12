@@ -17,32 +17,22 @@
         <div id="main" class="container">
             <table class="table table-striped">
                 <tr>
-                    <td style="width: 1px;"></td>
-                    <td><b>Twitter User</b></td>
-                    <td><b>Name</b></td>
-                    <td><b>TweetID</b></td>
-                    <td><b>Conversation</b></td>
-                    <td><b>Text</b></td>
-                    <td><b>Date Created</b></td>
+                    <td><b>Initial Text</b></td>
+                    <td><b>Reply</b></td>
                 </tr>
                 <tbody data-bind="foreach: tweets">
                     <tr>
-                        <td><span data-bind="visible: created_at" class="label label-success">Yup</span></td>
-                        <td><p><a data-bind="text: screen_name, attr: {href: userDetailURL}"></a></p></td>
-                        <td><p><b data-bind="text: name"></b></p></td>
-                        <td><p><b data-bind="text: id"></b></p></td>
-                        <td><p><a data-bind="text: mentions, attr: {href: conversURL}"></a></p></td>
-                        <td><p><b data-bind="text: text"></b></p></td>
-                        <td><p data-bind="text: created_at"></p></td>
+                        <td><p><b data-bind="text: mentions"></b></p></td>
+                        <td><p data-bind="text: text"></p></td>
                     </tr>
                 </tbody>
             </table>
+            <button onClick="location='../'" class="btn">Return to Tweets</button>
         </div>
         <script type="text/javascript">
             function TweetsViewModel() {
-                self.tasksURI = '/api/v1/tweet/?limit=0';
+                self.tasksURI = '/api/v1/tweet/?limit=1&offset=';
                 self.tweets = ko.observableArray();
-
                 self.ajax = function(uri, method, data) {
                     var request = {
                         url: uri,
@@ -58,24 +48,16 @@
                 LoadData();
             }
             function LoadData() {
+                var tweeturl = new String(window.location.href);
+                var tweetid = tweeturl.replace('http://192.168.33.10/twconv/?' ,'')
                 self.tweets([]);
-                self.ajax(self.tasksURI, 'GET').done(function(data) {
+                self.ajax((self.tasksURI + tweetid), 'GET').done(function(data) {
                     for (var i = 0; i < data.objects.length; i++) {
                         var tweet = {};
-                        tweet.created_at = ko.observable(data.objects[i].created_at);
                         tweet.text = ko.observable(data.objects[i].text);
-                        tweet.id = ko.observable(data.objects[i].id);
-                        tweet.screen_name = ko.observable(data.objects[i].twitteruser.screen_name);
-                        tweet.name = ko.observable(data.objects[i].twitteruser.name);
-                        if (data.objects[i].lang == ' ') {
-                            tweet.mentions = ko.observable(' ');
-                            } else {
-                            tweet.mentions = ko.observable('See Conversation');
-                            }
-                        tweet.userDetailURL = ko.observable("twuser/?screen_name=" + data.objects[i].twitteruser.screen_name);
-                        tweet.conversURL = ko.observable("twconv/?" + i.toString());
+                        tweet.mentions = ko.observable(data.objects[i].lang);
                         self.tweets.push(tweet);
-                    }
+                        }
                 });
             }
             ko.applyBindings(new TweetsViewModel());
