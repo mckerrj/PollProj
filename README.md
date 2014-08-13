@@ -43,10 +43,11 @@ We're going to go out of order from above and get it up and running, then walk t
     - Before you run off and run the vagrant file though, you may need a pre-requisite, particularly on OSX.  We're going to be using chef-solo for the this exercise.
        Chef Solo has some weirdness compared with enterprise, so make sure you get the latest.  Assuming you've got Vagrant installed, you'll need the omnibus package.
        So run: <code>vagrant plugin install vagrant-omnibus</code>.  Otherwise you're likely to get all sorts of versioning errors.
-    - The run <code>vagrant up</code>
+    - Then run <code>vagrant up</code>
     - I've found that sometimes this will provision the VM with chef-solo, and sometimes not.  If you don't see any chef stuff happening, run <code>vagrant provision</code>
        after <code>vagrant up</code> has completed.
     - ssh into the VM using <code>vagrant ssh</code>
+    - If you get an error from Chef about being unpable to interact with Github (access denied or something like that) you need to setup keys for github ON YOUR HOST MACHINE.  I have vagrant setup to passthrough ssh from the host.  If you want something else, then edit the Vagrantfile to do what you want.
     - **Note** You'll see OATH stuff in the 'settings.py' file but I've revoked access for those.  You'll need to add your own OAUTH stuff for Twitter.
       want your own stuff, please change the following parameters in the project's 'settings.py' file.
       - OAUTH_TOKEN
