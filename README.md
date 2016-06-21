@@ -63,7 +63,7 @@ We're going to go out of order from above and get it up and running, then walk t
     - You'll need to run some stuff to finish it all.
        - Activate the virtual environment <code>source twitter_ve/bin/activate</code>
        - Switch directories into the twitter directory
-       - run <code>python manage.py syncdb</code>  When the terminal asks you if you want to create a superuser, say, 'no'
+       - run <code>python manage.py syncdb --all</code>  When the terminal asks you if you want to create a superuser, say, 'no'
        - run <code>python manage.py loaddata twitter/tests/fixtures/data.json</code>  Here we're just loading some data for giggles so you can play around with the API's
        - run <code>sudo python manage.py collectstatic</code> (need sudo, because of where I'm putting the static files).
        - Now we want to runs some tests, make sure everything works, so run <code>python manage.py test</code> It may ask you if you want to delete the test_twitter db,
