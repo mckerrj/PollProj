@@ -65,7 +65,7 @@ We're going to go out of order from above and get it up and running, then walk t
        - Switch directories into the twitter directory
        - run <code>python manage.py syncdb --all</code>  When the terminal asks you if you want to create a superuser, say, 'no'
        - run <code>python manage.py loaddata twitter/tests/fixtures/data.json</code>  Here we're just loading some data for giggles so you can play around with the API's
-       - run <code>sudo python manage.py collectstatic</code> (need sudo, because of where I'm putting the static files).
+       - run <code>sudo python manage.py collectstatic</code> (need sudo, because of where I'm putting the static files). If sudo accesses a different python, you may need to run <code>sudo /home/vagrant/twitter_ve/bin/python manage.py collectstatic</code>
        - Now we want to runs some tests, make sure everything works, so run <code>python manage.py test</code> It may ask you if you want to delete the test_twitter db,
          say, 'yes'.  Should be ok now.
     - Now you need to run the process that goes to Twitter and sucks up your twitter info. 
